@@ -17,19 +17,25 @@
     
     <div class="nav">
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Movies</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#">Home</a></li> 
+        <img id="search-icon" src="./img/search.svg">
+        <li><a href="./pages/explore.html">Explore</a></li>
       </ul>
+      
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search movies...">
+        <button class="search-button" onclick="searchMovies()">Search</button>
+      </div>
+      
     </div>
+    
 
     
   <div>
 
     <div class="hero" id="hero">
-      <img src="./img/left (1).svg" id="left_btn">
-      <img src="./img/left (2).svg" id="right_btn">
+      <img src="./img/left.svg" id="left_btn">
+      <img src="./img/right.svg" id="right_btn">
       <div class="circles-container">
         <div class="circle" id="0"></div>
         <div class="circle" id="1"></div>
@@ -42,6 +48,7 @@
 
     <div class="title_in">
         <h1>Latest Release</h1>
+        <button id="new">Show All</button>
     </div>
     
 
@@ -51,6 +58,7 @@
 
     <div class="title_in">
         <h1>Coming Soon</h1>
+        <button id="soon">Show All</button>
     </div>
 
     <div class="movie-list" id="soon-list">
