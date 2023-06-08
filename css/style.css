@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -11,12 +10,6 @@ body {
   line-height: 1.5;
   color: #eee;
   background-color: #111;
-}
-
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 15px;
 }
 
 
@@ -111,12 +104,13 @@ header {
 }
 
 .circle.active {
-  background-color: #ff0000; /* Replace with your desired color */
+  background-color: #ff0000; 
 }
 
 .circle.active:hover {
-  background-color: #ff0000; /* Replace with your desired color */
+  background-color: #ff0000; 
 }
+
 
 
 
@@ -135,13 +129,17 @@ header {
 }
 
 .movie-list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 15px;
-  flex-wrap: wrap;
   margin-top: 50px;
   padding: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.movie-list::-webkit-scrollbar {
+  display: none;
 }
 
 .title_in{
@@ -156,41 +154,42 @@ header {
   justify-content: center;
   align-items: center;
   width: auto;
-  height: 900px;
+  height: 650px;
   background-color: #222;
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   animation: fadeIn 1s ease-in-out;
   overflow: hidden;
   color: white;
+  flex: 0 0 auto;
+  margin-right: 10px; 
 }
 
 .movie-card img {
   max-width: auto; 
-  max-height: 400px; 
+  max-height: 300px; 
   object-fit: cover;
   margin-bottom: 10px;
 }
 
 .text{
-  height: 400px;
+  height: 300px;
   width: auto;
 }
 
 .movie-card h3 {
   text-align: center;
-  height: 100px;
+  height: 50px;
   width: 300px;
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 
 .movie-card p {
   font-size: 16px;
   width: 300px;
-  margin-bottom: 20px;
 }
 
 .movie-card:hover {
@@ -243,3 +242,4 @@ footer p {
     transform: translateY(0);
   }
 }
+

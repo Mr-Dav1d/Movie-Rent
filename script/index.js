@@ -14,7 +14,7 @@ const apiKey = '225e69e6fd6663b3c629a8ea6adf8d7c';
 const currentDate = new Date().toISOString().split('T')[0];
 const API_URL_SOON = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&primary_release_date.gte=${currentDate}`;
 
-const maxLength = 300;
+const maxLength = 200;
 const top_banner_list = [];
 let index = 0;
 let bannerTimeout;
@@ -26,7 +26,7 @@ importBanner(API_URL_POP);
 async function importMovieLatest(url) {
   const data = await fetch(url);
   const jaison = await data.json();
-  const firstFourMovies = jaison.results.slice(0, 4); // Get only the first 4 movies
+  const firstFourMovies = jaison.results; 
   show_movie(firstFourMovies);
   
 }
@@ -34,7 +34,7 @@ async function importMovieLatest(url) {
 async function importMovieSoon(url){
     const data = await fetch(url);
     const jaison = await data.json();
-    const firstFourMovies = jaison.results.slice(0, 4);
+    const firstFourMovies = jaison.results;
     show_soon(firstFourMovies);
 }
 
@@ -59,51 +59,49 @@ function popular_list(jaison) {
 }
 
 function show_banner(jaison) {
-    popular_list(jaison);
-    
+  popular_list(jaison);
   
-    function setBanner() {
-      if (index === top_banner_list.length){
-            index = 0;
-      }
-      if (index < top_banner_list.length) {
-            const picture_banner = IMG_PATH + top_banner_list[index];
-            divElement.style.backgroundImage = `url(${picture_banner})`;
 
-            circles.forEach((circle, circleIndex) => {
-                if (circleIndex === index) {
-                  circle.classList.add('active');
-                } else {
-                  circle.classList.remove('active');
-                }
-              });
-
-            index++;
-            bannerTimeout = setTimeout(setBanner, 5000);
-      }
+  function setBanner() {
+    if (index === top_banner_list.length){
+          index = 0;
     }
-  
-    setBanner();
+    if (index < top_banner_list.length) {
+          const picture_banner = IMG_PATH + top_banner_list[index];
+          divElement.style.backgroundImage = `url(${picture_banner})`;
+
+          circles.forEach((circle, circleIndex) => {
+              if (circleIndex === index) {
+                circle.classList.add('active');
+              } else {
+                circle.classList.remove('active');
+              }
+            });
+
+          index++;
+          bannerTimeout = setTimeout(setBanner, 5000);
+    }
   }
+
+  setBanner();
+}
 
 function updateCircleColors() {
 circles.forEach((circle, circleIndex) => {
-    if (circleIndex === index) {
-    circle.classList.add('active');
-    } else {
-    circle.classList.remove('active');
-    }
+  if (circleIndex === index) {
+  circle.classList.add('active');
+  } else {
+  circle.classList.remove('active');
+  }
 });
 }
-
-
 
 function show_movie(jaison) {
   new_movies.innerHTML = "";
 
   jaison.forEach((movie) => {
     const comic_inf = document.createElement("div");
-    const { title, overview, poster_path } = movie;
+    const { id ,title, overview, poster_path } = movie;
 
     comic_inf.classList.add("movie-card");
 
@@ -115,10 +113,16 @@ function show_movie(jaison) {
           <h3>${title}</h3>
           <p>${truncatedDescription}</p>
       </div>
-      <a href="#" class="btn">Rent Now</a>
+      <a href="#" class="btn" id="${id}">Rent Now</a>
     `;
 
     new_movies.appendChild(comic_inf);
+    const a_btn = document.getElementById(id);
+
+    a_btn.addEventListener("click", () => {
+      localStorage.setItem("product", JSON.stringify(movie));
+      window.location = "../pages/product.html";
+    });
   });
   const picture_banner = IMG_PATH + jaison[0].backdrop_path;
   divElement.style.backgroundImage = `url(${picture_banner})`;
@@ -152,29 +156,24 @@ function show_soon(jaison) {
   }
 
 
- 
-
-
-
-
 
 // clicks
 
 
 circles.forEach(circle => {
-    circle.addEventListener('click', () => {
-        clearTimeout(bannerTimeout); 
-        importBanner(API_URL_POP);
-        index = circle.id;
-    });
+  circle.addEventListener('click', () => {
+      clearTimeout(bannerTimeout); 
+      importBanner(API_URL_POP);
+      index = circle.id;
+  });
 });
 
 left.addEventListener("click", function() {
-    clearTimeout(bannerTimeout); 
-    importBanner(API_URL_POP);
-  });
-  
+  clearTimeout(bannerTimeout); 
+  importBanner(API_URL_POP);
+});
+
 right.addEventListener("click", function() {
-    clearTimeout(bannerTimeout); 
-    importBanner(API_URL_POP);
+  clearTimeout(bannerTimeout); 
+  importBanner(API_URL_POP);
 });
