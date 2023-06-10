@@ -18,7 +18,7 @@
               <ul>
                 <li><a href="../index.html">Home</a></li> 
                 <img id="search-icon" src="../img/search.svg">
-                <li><a href="#">Explore</a></li>
+                <li><a href="./explore.html">Explore</a></li>
               </ul>
               
               <div class="search-bar">
@@ -32,35 +32,76 @@
 
         <div class="container_mid">
 
-          <div class="buy">
-              <div class="poster" id="poster">
+          <div class="buy" id="buy">
+            <div class="curtain"> </div>
+              <div class="movie-card">
+                <div class="poster" id="poster"> </div>
 
-                <div class="curtain">
-                  <h1 id="title"></h1>
-                  <div style="display: flex; gap: 5px;">
-                    <h2 id="price">0.00</h2> <h2 class="price">$</h2>
-                  </div>
-                  <div class="amounter">
-                    <button id="minus">-</button>
-                    <div style="display: flex; gap: 10px;">
-                      <h2 id="week">1</h2> <h2>week</h2>
+                <div class="text">
+                    <div class="price">
+                      <h2 id="price">0.00</h2> <h2>$</h2>
                     </div>
-                    <button id="plus">+</button>
+
+                    <div class="amounter">
+                      <button id="minus">-</button>
+                      <div class="week">
+                        <h2 id="week">1</h2> <h2>week</h2>
+                      </div>
+                      <button id="plus">+</button>
+                    </div>
+
+                    <button id="add_cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <div class="overview">
+                <div class="top">
+                  <div> <h1 id="title"></h1> </div>
+                  <div class="genre_date">
+                    <div id="language"></div>
+
+                    <h3 id="date"></h3>
+
+                    <div class="circle"></div>
+
+                    <ul id="genre">
+
+                    </ul>
+
                   </div>
-                  <button id="add_cart">Add to Cart</button>
+      
+                </div>
+
+                <div class="middle">
+                  <div class="user_score" id="user_score">
+                    <span id="score"></span>
+                  </div>
+                  <h4>User Score</h4>
+                  <button id="play_trailer" class="">Play Trailer</button>
+                </div>
+
+                <div class="bottom">
+                  <h2>Overview</h2>
+                  <h4 id="description"></h4>
+
                 </div>
 
               </div>
-  
-              <div id="videoPlayer">
-                <iframe id="videoFrame" frameborder="0" allowfullscreen controls></iframe>
-              </div>
-  
           </div>
+
+          <div class="trailer">
+            <div id="videoPlayer">
+              <iframe id="videoFrame" frameborder="0" allowfullscreen controls></iframe>
+            </div>
+          </div>
+
         </div>
 
         <footer>
-          <p>&copy; 2023 Movie Explorer. All rights reserved.</p>
+          <div> 
+            <P>Movies, TV Shows &amp; other metadata from <a href="https://www.themoviedb.org/" title="Visit the TMDb(The Movie Database) Website">TMDb</a></P>
+          </div>
+          <p>&copy; 2023 Movie Blu-ray Disc Rental. All rights reserved.</p>
         </footer>
 
         <script src="../script/product.js"></script>

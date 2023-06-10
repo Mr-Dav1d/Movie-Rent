@@ -153,10 +153,23 @@ body {
   }
   
   footer {
-    background-color: #121212;
-    padding: 10px;
+    background-color: #222;
+    padding: 20px 0;
     text-align: center;
-    font-size: 12px;
-    color: #aaaaaa;
+  }
+  
+  footer p {
+    color: #eee;
+    font-size: 14px;
+  }
+  
+  footer a{
+    color: #eee;
+    font-size: 14px;
+    font-weight: 900;
+  }
+  
+  footer a:hover{
+    color: #ff0000;
   }
   

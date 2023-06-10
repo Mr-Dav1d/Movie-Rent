@@ -292,6 +292,15 @@ footer p {
   font-size: 14px;
 }
 
+footer a{
+  color: #eee;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+footer a:hover{
+  color: #ff0000;
+}
 
 @media screen and (max-width: 800px) {
   .movie-card {
