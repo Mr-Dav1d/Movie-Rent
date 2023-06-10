@@ -6,6 +6,10 @@ const right = document.getElementById("right_btn");
 const circles = document.querySelectorAll('.circle');
 const searchIcon = document.getElementById("search-icon");
 const searchBar = document.querySelector(".search-bar");
+const moveLeftBtn = document.getElementById('move-left');
+const moveRightBtn = document.getElementById('move-right');
+const soonLeftBtn = document.getElementById('soon-left');
+const soonRightBtn = document.getElementById('soon-right');
 
 
 const API_URL_POP = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=225e69e6fd6663b3c629a8ea6adf8d7c&page=1";
@@ -214,6 +218,19 @@ searchIcon.addEventListener("click", () => {
 });
 
 
+moveLeftBtn.addEventListener('click', () => {
+  new_movies.scrollBy({ left: -700, behavior: 'smooth' }); 
+});
+
+moveRightBtn.addEventListener('click', () => {
+  new_movies.scrollBy({ left: 700, behavior: 'smooth' }); 
+});
 
 
+soonLeftBtn.addEventListener('click', () => {
+  soon_movies.scrollBy({ left: -700, behavior: 'smooth' }); 
+});
 
+soonRightBtn.addEventListener('click', () => {
+  soon_movies.scrollBy({ left: 700, behavior: 'smooth' }); 
+});

@@ -4,10 +4,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/product.css">
+    <link href="https://fonts.cdnfonts.com/css/akzidenz-grotesk-next" rel="stylesheet">
+    <title id="page_name">Document</title>
 </head>
-<body>
-    fuck yeah
-    
-</body>
+    <body>
+        <div>
+            <div class="title">
+                <h1>Movie Verse</h1>
+            </div>
+            
+            <div class="nav">
+              <ul>
+                <li><a href="../index.html">Home</a></li> 
+                <img id="search-icon" src="../img/search.svg">
+                <li><a href="#">Explore</a></li>
+              </ul>
+              
+              <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search movies...">
+                <button class="search-button" onclick="searchMovies()">Search</button>
+              </div>
+              
+            </div>
+  
+        <div>
+
+        <div class="container_mid">
+
+          <div class="buy">
+              <div class="poster" id="poster">
+
+                <div class="curtain">
+                  <h1 id="title"></h1>
+                  <div style="display: flex; gap: 5px;">
+                    <h2 id="price">0.00</h2> <h2 class="price">$</h2>
+                  </div>
+                  <div class="amounter">
+                    <button id="minus">-</button>
+                    <div style="display: flex; gap: 10px;">
+                      <h2 id="week">1</h2> <h2>week</h2>
+                    </div>
+                    <button id="plus">+</button>
+                  </div>
+                  <button id="add_cart">Add to Cart</button>
+                </div>
+
+              </div>
+  
+              <div id="videoPlayer">
+                <iframe id="videoFrame" frameborder="0" allowfullscreen controls></iframe>
+              </div>
+  
+          </div>
+        </div>
+
+        <footer>
+          <p>&copy; 2023 Movie Explorer. All rights reserved.</p>
+        </footer>
+
+        <script src="../script/product.js"></script>
+    </body>
 </html>

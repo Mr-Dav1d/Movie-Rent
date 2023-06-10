@@ -1,0 +1,403 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    color: #eee;
+    background-color: #111;
+  }
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    color: #fff;
+    font-family: 'Akzidenz-Grotesk Next', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+    background-image: url(../img/top_banner.gif);
+}
+
+  
+.nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    gap: 35px;
+    padding: 10px;
+}
+
+.nav img{
+    max-width: auto; 
+    max-height: 27px; 
+    object-fit: fit;
+}
+
+.nav img:hover{
+    transform: scale(1.15);
+}
+
+.nav a {
+    display: block;
+    color: #eee;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav a:hover {
+    color: #ff0000;
+}
+
+.search-bar {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#search-input {
+    padding: 10px;
+    border-color: white;
+    border-radius: 4px;
+    color: white;
+    background-color: #111;
+    font-size: 16px;
+    width: 300px;
+
+}
+
+.search-button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.search-button:hover {
+    background-color: #930101;
+}
+
+.container_mid{
+    background-color: rgba(57, 55, 55, 0.653); 
+}
+
+
+.buy{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    padding: 60px 0px;
+}
+
+.poster{
+    width: 30%;
+    height: 670px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+
+.curtain{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 80px;
+    padding: 40px;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(36, 36, 36, 0.511);
+    opacity: 0;
+}
+
+.curtain:hover{
+    opacity: 1;
+}
+
+.poster .amounter,
+.poster h2,
+.poster button{
+    opacity: 0; 
+    transition: opacity 0.4s ease-in-out; 
+}
+
+.poster:hover .amounter,
+.poster:hover h2,
+.poster:hover button{
+    opacity: 1;
+}
+
+.curtain #price, .price{
+    text-align: center;
+    font-size: 26px;
+}
+
+#title{
+    height: 100px;
+    color: #fff;
+    font-family: 'Akzidenz-Grotesk Next', sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    text-align: center;
+}
+
+.amounter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.amounter h2{
+    text-align: center;
+}
+
+.amounter button,
+.curtain button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+.amounter button:hover,
+.curtain button:hover {
+    background-color: #930101;
+}
+
+#videoPlayer{
+    width: 60%;
+    height: 670px;
+}
+
+#videoPlayer iframe{
+    height: 100%;
+    width: 100%;
+}
+
+.control{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+
+}
+
+
+
+
+
+footer {
+    background-color: #222;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+footer p {
+    color: #eee;
+    font-size: 14px;
+}
+
+
+@media screen and (max-width: 1100px) {
+    .buy{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding: 60px 0px;
+    }
+
+    .poster{
+        width: 30%;
+        height: 470px;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+      }
+
+    #videoPlayer{
+        width: 60%;
+        height: 470px;
+    }
+}
+
+
+@media screen and (max-width: 950px) {
+    .buy{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding: 50px 0px;
+    }
+
+    .poster{
+        width: 30%;
+        height: 450px;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+      }
+
+    #videoPlayer{
+        width: 50%;
+        height: 450px;
+    }
+
+    #title{
+        height: 100px;
+        color: #fff;
+        font-family: 'Akzidenz-Grotesk Next', sans-serif;
+        font-size: 27px;
+        font-weight: 900;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 870px) {
+    .buy{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding: 40px 0px;
+    }
+
+    .poster{
+        width: 35%;
+        height: 670;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+      }
+
+    #videoPlayer{
+        width: 80%;
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .buy{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding: 30px 0px;
+    }
+
+    .poster{
+        width: 40%;
+        height: 670;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+      }
+
+    
+    #title{
+        height: 100px;
+        color: #fff;
+        font-family: 'Akzidenz-Grotesk Next', sans-serif;
+        font-size: 20px;
+        font-weight: 900;
+        text-align: center;
+    }
+    
+    .amounter{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .amounter button,
+    .curtain button {
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 7px 17px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+    .poster{
+        width: 48%;
+        height: 570;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+      }
+}
+
+@media screen and (max-width: 550px) {
+    .poster{
+        width: 60%;
+        height: 470px;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+      }
+}
+
+@media screen and (max-width: 450px) {
+    .poster{
+        width: 60%;
+        height: 470px;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+      }
+
+    
+    #videoPlayer{
+        width: 80%;
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .poster{
+        width: 80%;
+        height: 470px;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+      }
+
+    
+    #videoPlayer{
+        width: 80%;
+        height: 300px;
+    }
+}

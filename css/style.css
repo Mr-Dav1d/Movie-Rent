@@ -185,18 +185,23 @@ body {
   text-align: start;
 }
 
-.title_in button{
+.clickers{
+  display: flex;
+}
+
+.clickers button{
   margin-right: 40px;
-  font-size: 15px;
+  font-size: 17px;
   color: white;
   border: none;
   background-color: transparent;
 }
 
-.title_in button:hover{
-  font-size: 17px;
+.clickers button:hover{
   color: #ff0000;
 }
+
+
 
 .movie-card {
   position: relative;
@@ -332,7 +337,7 @@ footer p {
 }
 
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 500px) {
   .nav a {
     display: block;
     color: #eee;
@@ -376,7 +381,7 @@ footer p {
     align-items: center;
     margin-top: 20px;
     margin-left: 40px;
-    font-size: 17px;
+    font-size: 15px;
     text-align: start;
   }
   
@@ -430,9 +435,20 @@ footer p {
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
   }
+
+  .title_in{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 40px;
+    font-size: 12px;
+    text-align: start;
+  }
+  
 }
 
-@media screen and (max-width: 250px) {
+@media screen and (max-width: 300px) {
   .nav a {
     display: block;
     color: #eee;
@@ -450,6 +466,24 @@ footer p {
     font-size: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+  }
+
+  .clickers button{
+    margin-right: 10px;
+    font-size: 12px;
+    color: white;
+    border: none;
+    background-color: transparent;
+  }
+
+  .title_in{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 40px;
+    font-size: 8px;
+    text-align: start;
   }
 }
 
