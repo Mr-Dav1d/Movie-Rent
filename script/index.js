@@ -134,7 +134,7 @@ function show_movie(jaison) {
 
     comic_inf.addEventListener("click", () => {
       localStorage.setItem("product", JSON.stringify(movie));
-      window.location = "../pages/product.html";
+      window.location = "./pages/product.html";
     });
   });
   const picture_banner = IMG_PATH + jaison[0].backdrop_path;
