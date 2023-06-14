@@ -14,14 +14,13 @@ const soonRightBtn = document.getElementById('soon-right');
 
 const API_URL_POP = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=225e69e6fd6663b3c629a8ea6adf8d7c&page=1";
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280/";
-const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=225e69e6fd6663b3c629a8ea6adf8d7c&query="';
 
 
 const apiKey = '225e69e6fd6663b3c629a8ea6adf8d7c';
 const currentDate = new Date().toISOString().split('T')[0];
 const API_URL_SOON = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&primary_release_date.gte=${currentDate}`;
 
-const maxLength = 500;
+const maxLength = 280;
 const top_banner_list = [];
 let index = 0;
 let bannerTimeout;
@@ -129,8 +128,11 @@ function show_movie(jaison) {
           <p class="desc">${truncatedDescription}</p>
       </div>
     `;
-
-    new_movies.appendChild(comic_inf);
+    if (poster_path === null) {
+      console.log('not enough info for this movie: ', movie);
+    }else{
+      new_movies.appendChild(comic_inf);
+    }
 
     comic_inf.addEventListener("click", () => {
       localStorage.setItem("product", JSON.stringify(movie));
@@ -145,7 +147,6 @@ function show_soon(jaison) {
     soon_movies.innerHTML = "";
   
     jaison.forEach((movie) => {
-        console.log(movie);
       const comic_inf = document.createElement("div");
       const { title, overview, poster_path, release_date } = movie;
   
@@ -163,10 +164,15 @@ function show_soon(jaison) {
             <p class="desc">${truncatedDescription}</p>
         </div>
       `;
-  
-      soon_movies.appendChild(comic_inf);
+      
+      if (poster_path === null) {
+        console.log('not enough info for this movie: ', movie);
+      }else{
+        soon_movies.appendChild(comic_inf);
+      }
+      
       comic_inf.addEventListener("click", () => {
-          alert("Movie Will be Released: " + release_date);
+          createPopup("Movie Will be Released: " + release_date);
       });
     });
     const picture_banner = IMG_PATH + jaison[0].backdrop_path;
@@ -174,6 +180,55 @@ function show_soon(jaison) {
   }
 
 
+
+function searcher(query, mediaType = 'movie') {
+  const dziritadi = `https://api.themoviedb.org/3/search/${mediaType}`;
+  const bolo = `${dziritadi}?api_key=${apiKey}&query=${query}`;
+
+  return fetch(bolo)
+    .then(response => response.json())
+    .then(data => {
+      const results = data.results || [];
+      return results;
+    })
+    .catch(error => {
+      console.error('search error: ', error);
+      return [];
+    });
+}
+
+function createPopup(message) {
+  const popup = document.createElement('div');
+  popup.id = 'popup';
+  popup.textContent = message;
+
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.remove();
+  }, 3000); 
+}
+
+function searchMovies() {
+  const input = document.getElementById('search-input');
+
+  const query = input.value;
+
+  searcher(query)
+    .then(results => {
+      if (results.length > 0) {
+        console.log('Search results:', results);
+        localStorage.setItem("searched", JSON.stringify(results));
+        window.location = "./pages/explore.html";
+      } else {
+        createPopup('Nothing found');
+      }
+    })
+    .catch(error => {
+      console.error('Error occurred:', error);
+      createPopup('Error occurred');
+    });
+}
  
 
 

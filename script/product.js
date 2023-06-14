@@ -14,11 +14,14 @@ const score = document.getElementById("score");
 const user_score = document.getElementById("user_score");
 const play_trailer = document.getElementById("play_trailer");
 const description = document.getElementById("description");
+const searchIcon = document.getElementById("search-icon");
+const searchBar = document.querySelector(".search-bar");
 
 
 const product = localStorage.getItem("product");
 const productInfo = JSON.parse(product);
 
+const apiKey = '225e69e6fd6663b3c629a8ea6adf8d7c';
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280/";
 const genre_url = 'https://api.themoviedb.org/3/genre/movie/list?api_key=225e69e6fd6663b3c629a8ea6adf8d7c'
 
@@ -27,6 +30,7 @@ const API_URL_video = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api
 
 
 const genreNames = [];
+let isSearchBarVisible = false;
 
 
 
@@ -44,7 +48,6 @@ async function importGenre(url, movie_genre) {
     const jaison = await data2.json();
     genre_getter(jaison, movie_genre);
     show_product(productInfo, genreNames);
-    console.log(productInfo)
     
 }
 
@@ -104,14 +107,13 @@ function show_product(jaison, genreNames) {
     buy.style.backgroundImage = `url(${picture_banner})`;
 
     score.textContent = vote_average.toFixed(1);
-    if (score < 5.0) {
+    if (vote_average < 5) {
         user_score.classList.add("low");
-    } else if (score >= 5.0 && score < 8.0) {
+    } else if (vote_average >= 5 && vote_average < 8) {
         user_score.classList.add("medium");
     } else {
         user_score.classList.add("high");
     }
-    console.log(productInfo);
 
     description.innerText = overview;
   }
@@ -131,6 +133,45 @@ function show_video(jaison){
       });
     videoFrame.src = "https://www.youtube.com/embed/" + key_one + "?autoplay=1";
 }
+
+function searcher(query, mediaType = 'movie') {
+    const dziritadi = `https://api.themoviedb.org/3/search/${mediaType}`;
+    const bolo = `${dziritadi}?api_key=${apiKey}&query=${query}`;
+  
+    return fetch(bolo)
+      .then(response => response.json())
+      .then(data => {
+        const results = data.results || [];
+        return results;
+      })
+      .catch(error => {
+        console.error('search error: ', error);
+        return [];
+      });
+  }
+
+  function searchMovies() {
+    const input = document.getElementById('search-input');
+  
+    const query = input.value;
+  
+    searcher(query)
+      .then(results => {
+        if (results.length > 0) {
+          localStorage.setItem("searched", JSON.stringify(results));
+          window.location = "./explore.html";
+        } else {
+          window.location = "./explore.html";
+        }
+      })
+      .catch(error => {
+        console.error('Error occurred:', error);
+        createPopup('Error occurred');
+      });
+  }
+
+
+
 
 
 
@@ -165,5 +206,16 @@ play_trailer.addEventListener("click", function() {
     const targetSection = videoFrame;
     targetSection.scrollIntoView({ behavior: "smooth" });
 });
+
+
+searchIcon.addEventListener("click", () => {
+    if (isSearchBarVisible) {
+      searchBar.style.display = "none";
+      isSearchBarVisible = false;
+    } else {
+      searchBar.style.display = "flex";
+      isSearchBarVisible = true;
+    }
+  });
 
 

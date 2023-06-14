@@ -9,66 +9,46 @@
     <title>Explore</title>
 </head>
 <body>
-    <div>
-        <div class="title">
-            <h1>Movie Verse</h1>
-        </div>
-        
-        <div class="nav">
-          <ul>
-            <li><a href="../index.html">Home</a></li> 
-            <img id="search-icon" src="../img/search.svg">
-            <li><a href="#">Explore</a></li>
-          </ul>
-          
-          <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Search movies...">
-            <button class="search-button" onclick="searchMovies()">Search</button>
+      <div>
+          <div class="title">
+              <h1>Movie Verse</h1>
           </div>
           
+          <div class="nav">
+            <ul>
+              <li><a href="../index.html">Home</a></li> 
+              <img id="search-icon" src="../img/search.svg">
+              <li><a href="#">Explore</a></li>
+            </ul>
+            
+            <div class="search-bar">
+              <input type="text" id="search-input" placeholder="Search movies...">
+              <button class="search-button" onclick="searchMovies()">Search</button>
+            </div>
+            
+          </div>
+          
+      
+          
+      <div>
+  <div class="container" id="container">
+      <div>
+        <div class="movie-list-div">
+          <div class="movie-list" id="movie-list">
+
+          </div>
         </div>
-        
-    
-        
-    <div>
-  
-    <main>
-      <section class="filter-section">
-        <h2>Filters</h2>
-        <div class="filters">
-          <select id="genre-select">
-            <option value="">All Genres</option>
-            <option value="action">Action</option>
-            <option value="drama">Drama</option>
-            <option value="comedy">Comedy</option>
-            <!-- Add more genre options -->
-          </select>
-          <select id="year-select">
-            <option value="">All Years</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-            <!-- Add more year options -->
-          </select>
-          <button id="search-button">Search</button>
-        </div>
-      </section>
-  
-      <section class="movie-list-section">
-        <h2>Movie List</h2>
-        <ul id="movie-list">
-          <!-- Movie list items will be dynamically generated -->
-        </ul>
-      </section>
-    </main>
-  
-    <footer>
-      <div> 
-        <P>Movies, TV Shows &amp; other metadata from <a href="https://www.themoviedb.org/" title="Visit the TMDb(The Movie Database) Website">TMDb</a></P>
       </div>
-      <p>&copy; 2023 Movie Blu-ray Disc Rental. All rights reserved.</p>
-    </footer>
   
-    <script src="script.js"></script>
+      <footer>
+        <div> 
+          <P>Movies, TV Shows &amp; other metadata from <a href="https://www.themoviedb.org/" title="Visit the TMDb(The Movie Database) Website">TMDb</a></P>
+        </div>
+        <p>&copy; 2023 Movie Blu-ray Disc Rental. All rights reserved.</p>
+      </footer>
+
+  </div>
+  
+    <script src="../script/explore.js"></script>
   </body>
 </html>
