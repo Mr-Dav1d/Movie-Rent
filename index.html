@@ -10,72 +10,77 @@
 </head>
 
 <body>
-  <div>
-    <div class="title">
-        <h1>Movie Verse</h1>
-    </div>
-    
-    <div class="nav">
-      <ul>
-        <li><a href="#">Home</a></li> 
-        <img id="search-icon" src="./img/search.svg">
-        <li><a href="./pages/explore.html">Explore</a></li>
+  <div class="curtain">
+    <div>
+    <div class="navbar flex_space_between">
+      <img id="logo" class="logo" src="./img/logo.png">
+      <div id="search" class="flex_centerer">
+        <input id="input" type="text" placeholder="Search for a movie, tv show, person...">
+      </div>
+      <ul class="flex_centerer">
+        <li class="flex_centerer"><a href="#">Home</a></li>
+        <li class="flex_centerer"><a href="./pages/explore.html">Expolore</a></li>
+        <li class="flex_centerer"><a href="#">Services</a></li>
+        <li class="flex_centerer"><img id="search-icon" src="./img/search.svg"></li>
+        <li class="drop_down">
+          <a href="#" class="menu-icon">&#9776;</a>
+          <div class="dropdown-content">
+            <a href="#">Home</a>
+            <a href="./pages/explore.html">Expolore</a>
+            <a href="#">Services</a>
+          </div>
+        </li>
       </ul>
+    </div>
+  
+  
       
-      <div class="search-bar">
-        <input type="text" id="search-input" placeholder="Search movies...">
-        <button class="search-button" onclick="searchMovies()">Search</button>
+    <div class="mid">
+      <div class="curtain"></div>
+  
+      <div class="hero flex_space_between" id="hero">
+        <img src="./img/left.svg" id="left_btn">
+        <img src="./img/right.svg" id="right_btn">
+        <div class="circles-container flex_centerer">
+          <div class="circle" id="0"></div>
+          <div class="circle" id="1"></div>
+          <div class="circle" id="2"></div>
+          <div class="circle" id="3"></div>
+          <div class="circle" id="4"></div>
+        </div>
+  
+      </div>
+  
+      <div class="title_in flex_space_between">
+          <h1>Popular Now</h1>
+          <div class="clickers">
+            <button id="move-left"> < </button>
+            <button id="move-right"> > </button>
+            <button id="new">Show All</button>
+          </div>
       </div>
       
-      
-    </div>
-    
-
-    
-  <div>
-
-    <div class="hero" id="hero">
-      <img src="./img/left.svg" id="left_btn">
-      <img src="./img/right.svg" id="right_btn">
-      <div class="circles-container">
-        <div class="circle" id="0"></div>
-        <div class="circle" id="1"></div>
-        <div class="circle" id="2"></div>
-        <div class="circle" id="3"></div>
-        <div class="circle" id="4"></div>
+  
+      <div class="movie-list" id="movie-list">
+  
       </div>
-
-    </div>
-
-    <div class="title_in">
-        <h1>Popular Now</h1>
-        <div class="clickers">
-          <button id="move-left"> < </button>
-          <button id="move-right"> > </button>
-          <button id="new">Show All</button>
-        </div>
-    </div>
-    
-
-    <div class="movie-list" id="movie-list">
-
-    </div>
-
-    <div class="title_in">
-        <h1>Coming Soon</h1>
-        <div class="clickers">
-          <button id="soon-left"> < </button>
-          <button id="soon-right"> > </button>
-          <button id="soon">Show All</button>
-        </div>
-    </div>
-
-    <div class="movie-list" id="soon-list">
-
-    </div>
-
+  
+      <div class="title_in flex_space_between">
+          <h1>Coming Soon</h1>
+          <div class="clickers">
+            <button id="soon-left"> < </button>
+            <button id="soon-right"> > </button>
+            <button id="soon">Show All</button>
+          </div>
+      </div>
+  
+      <div class="movie-list" id="soon-list">
+  
+      </div>
+  
+  </div>
   <footer>
-    <div> 
+    <div class="footer"> 
       <P>Movies, TV Shows &amp; other metadata from <a href="https://www.themoviedb.org/" title="Visit the TMDb(The Movie Database) Website">TMDb</a></P>
     </div>
     <p>&copy; 2023 Movie Blu-ray Disc Rental. All rights reserved.</p>

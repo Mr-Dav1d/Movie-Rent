@@ -5,11 +5,15 @@ const left = document.getElementById("left_btn");
 const right = document.getElementById("right_btn");
 const circles = document.querySelectorAll('.circle');
 const searchIcon = document.getElementById("search-icon");
-const searchBar = document.querySelector(".search-bar");
+const searchBar = document.getElementById("search");
+const input = document.getElementById("input");
 const moveLeftBtn = document.getElementById('move-left');
 const moveRightBtn = document.getElementById('move-right');
 const soonLeftBtn = document.getElementById('soon-left');
 const soonRightBtn = document.getElementById('soon-right');
+const menuIcon = document.querySelector('.menu-icon');
+const dropdownContent = document.querySelector('.dropdown-content');
+const logo = document.getElementById('logo');
 
 
 const API_URL_POP = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=225e69e6fd6663b3c629a8ea6adf8d7c&page=1";
@@ -25,6 +29,7 @@ const top_banner_list = [];
 let index = 0;
 let bannerTimeout;
 let isSearchBarVisible = false;
+let isDropVisible = false;
 
 
 
@@ -120,7 +125,7 @@ function show_movie(jaison) {
     let truncatedDescription = overview.substring(0, maxLength) + " ...";
 
     comic_inf.innerHTML = `
-      <div class="poster">
+      <div class="poster flex_centerer">
         <img src="${IMG_PATH + poster_path}" alt="Movie 3">
       </div>
       <div class="text">
@@ -181,7 +186,7 @@ function show_soon(jaison) {
 
 
 
-function searcher(query, mediaType = 'movie') {
+function searcher(query, mediaType = 'multi') {
   const dziritadi = `https://api.themoviedb.org/3/search/${mediaType}`;
   const bolo = `${dziritadi}?api_key=${apiKey}&query=${query}`;
 
@@ -210,7 +215,7 @@ function createPopup(message) {
 }
 
 function searchMovies() {
-  const input = document.getElementById('search-input');
+  const input = document.getElementById('input');
 
   const query = input.value;
 
@@ -288,4 +293,28 @@ soonLeftBtn.addEventListener('click', () => {
 
 soonRightBtn.addEventListener('click', () => {
   soon_movies.scrollBy({ left: 700, behavior: 'smooth' }); 
+});
+
+
+searchBar.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    searchMovies();
+  }
+});
+
+menuIcon.addEventListener('click', function() {
+  dropdownContent.classList.toggle('show');
+  if (isDropVisible) {
+    divElement.style.marginTop = "0px";
+    isDropVisible = false;
+  } else {
+    divElement.style.marginTop = "28px";
+    isDropVisible = true;
+  }
+  
+});
+
+
+logo.addEventListener('click', function() {
+    window.location = "#";
 });

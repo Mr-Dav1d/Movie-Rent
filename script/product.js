@@ -1,5 +1,5 @@
 const page_name = document.getElementById("page_name");
-const name = document.getElementById("title");
+const namei = document.getElementById("title");
 const poster = document.getElementById("poster");
 const videoFrame = document.getElementById("videoFrame");
 const minus = document.getElementById("minus");
@@ -15,7 +15,13 @@ const user_score = document.getElementById("user_score");
 const play_trailer = document.getElementById("play_trailer");
 const description = document.getElementById("description");
 const searchIcon = document.getElementById("search-icon");
-const searchBar = document.querySelector(".search-bar");
+const searchBar = document.getElementById("search");
+const input = document.getElementById("input");
+const cast = document.getElementById("cast");
+const menuIcon = document.querySelector('.menu-icon');
+const dropdownContent = document.querySelector('.dropdown-content');
+const logo = document.getElementById('logo');
+
 
 
 const product = localStorage.getItem("product");
@@ -31,6 +37,7 @@ const API_URL_video = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api
 
 const genreNames = [];
 let isSearchBarVisible = false;
+let isDropVisible = false;
 
 
 
@@ -41,6 +48,13 @@ let isSearchBarVisible = false;
 
 
 importMovieVideo(API_URL_video);
+
+async function importCast(url){
+    const data = await fetch(url);
+    const data2 = await fetch(data.url);
+    const jaison_cast = await data2.json();
+    return jaison_cast.cast;
+}
 
 async function importGenre(url, movie_genre) {
     const data = await fetch(url);
@@ -76,46 +90,126 @@ function genre_getter(list, genreIds){
     }
 }
 
-function show_product(jaison, genreNames) {
+async function show_product(jaison, genreNames) {
     const currentYear = new Date().toISOString().split('T')[0].slice(0, 4);
-    const { title, release_date, poster_path, original_language, backdrop_path, vote_average, overview } = jaison;
-    const release_date_int = parseInt(release_date.slice(0, 4), 10)
-    if(currentYear === release_date.slice(0, 4)){
-        price.textContent = "10";
+    const { id,title, release_date, poster_path, original_language, backdrop_path, vote_average, overview, media_type, first_air_date, name} = jaison;
+    let API_CAST = "";
+    API_CAST = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`;
+    if(media_type === "tv"){
+      API_CAST = `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`;
     }
-    if(release_date_int < 2023 && release_date_int > 2000 ){
-        price.textContent = "8";
+    if(media_type === "movie"){
+      API_CAST = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`;
     }
+    const castData = await importCast(API_CAST);
+    console.log(castData);
+    const casti = castData.slice(0, 6);
+    let index = 0;
 
-    if(release_date_int < 2001){
-        price.textContent = "5";
-    }
-    poster.innerHTML = ` <img src=${IMG_PATH + poster_path} alt="Movie 3"> `;
-    date.textContent = release_date;
-    name.textContent = title;
-    page_name.textContent = title;
+    casti.forEach((each) => {
+      index += 1;
+      const comic_inf = document.createElement("li");
+      comic_inf.classList.add("flex_centerer");
+      comic_inf.innerHTML = `
+          <img src=${IMG_PATH + each.profile_path}>
+          <div class="char flex_centerer">
+            <h3>${each.name}</h3>
+            <h4>${each.character}</h4>
+          </div>
+      `;
+      comic_inf.addEventListener("click", () => {
+        localStorage.setItem("person", JSON.stringify(each.id));
+        window.location = "./person.html";
+      });
 
-    let genre_string = "";
-    genreNames.forEach((each) => {
-        genre_string += "<li>" + each + ", </li>";
+      cast.appendChild(comic_inf);
     });
-    genre.innerHTML = genre_string;
 
-    language.innerHTML = original_language;
 
-    const picture_banner = IMG_PATH + backdrop_path;
-    buy.style.backgroundImage = `url(${picture_banner})`;
+    if(media_type === "tv"){
+      const first_air_dat = parseInt(first_air_date.slice(0, 4), 10)
+        if(currentYear === first_air_date.slice(0, 4)){
+          price.textContent = "10";
+      }
+      if(first_air_dat < 2023 && first_air_dat > 2000 ){
+          price.textContent = "8";
+      }
 
-    score.textContent = vote_average.toFixed(1);
-    if (vote_average < 5) {
-        user_score.classList.add("low");
-    } else if (vote_average >= 5 && vote_average < 8) {
-        user_score.classList.add("medium");
-    } else {
-        user_score.classList.add("high");
+      if(first_air_dat < 2001){
+          price.textContent = "5";
+      }
+      poster.innerHTML = ` <img src=${IMG_PATH + poster_path} alt="Movie 3"> `;
+      date.textContent = first_air_date;
+      namei.textContent = name;
+      page_name.textContent = name;
+
+      let genre_string = "";
+      genreNames.forEach((each) => {
+          genre_string += "<li>" + each + ", </li>";
+      });
+      genre.innerHTML = genre_string;
+
+      language.innerHTML = original_language;
+
+      const picture_banner = IMG_PATH + backdrop_path;
+      buy.style.backgroundImage = `url(${picture_banner})`;
+
+      score.textContent = vote_average.toFixed(1);
+      if (vote_average < 5) {
+          user_score.classList.add("low");
+      } else if (vote_average >= 5 && vote_average < 8) {
+          user_score.classList.add("medium");
+      } else {
+          user_score.classList.add("high");
+      }
+
+      description.innerText = overview;
+    }
+    else if(media_type === "person"){
+      console.log("thats person")
+    }
+    else{
+      const release_date_int = parseInt(release_date.slice(0, 4), 10)
+        if(currentYear === release_date.slice(0, 4)){
+          price.textContent = "10";
+      }
+        if(release_date_int < 2023 && release_date_int > 2000 ){
+            price.textContent = "8";
+        }
+
+        if(release_date_int < 2001){
+            price.textContent = "5";
+        }
+        poster.innerHTML = ` <img src=${IMG_PATH + poster_path} alt="Movie 3"> `;
+        date.textContent = release_date;
+        namei.textContent = title;
+        page_name.textContent = title;
+
+        let genre_string = "";
+        genreNames.forEach((each) => {
+            genre_string += "<li>" + each + ", </li>";
+        });
+        genre.innerHTML = genre_string;
+
+        language.innerHTML = original_language;
+
+        const picture_banner = IMG_PATH + backdrop_path;
+        buy.style.backgroundImage = `url(${picture_banner})`;
+
+        score.textContent = vote_average.toFixed(1);
+        if (vote_average < 5) {
+            user_score.classList.add("low");
+        } else if (vote_average >= 5 && vote_average < 8) {
+            user_score.classList.add("medium");
+        } else {
+            user_score.classList.add("high");
+        }
+
+        description.innerText = overview;
     }
 
-    description.innerText = overview;
+
+    
   }
 
 
@@ -134,7 +228,7 @@ function show_video(jaison){
     videoFrame.src = "https://www.youtube.com/embed/" + key_one + "?autoplay=1";
 }
 
-function searcher(query, mediaType = 'movie') {
+function searcher(query, mediaType = 'multi') {
     const dziritadi = `https://api.themoviedb.org/3/search/${mediaType}`;
     const bolo = `${dziritadi}?api_key=${apiKey}&query=${query}`;
   
@@ -150,8 +244,20 @@ function searcher(query, mediaType = 'movie') {
       });
   }
 
+  function createPopup(message) {
+    const popup = document.createElement('div');
+    popup.id = 'popup';
+    popup.textContent = message;
+  
+    document.body.appendChild(popup);
+  
+    setTimeout(() => {
+      popup.remove();
+    }, 3000); 
+  }
+
   function searchMovies() {
-    const input = document.getElementById('search-input');
+    const input = document.getElementById('input');
   
     const query = input.value;
   
@@ -169,6 +275,7 @@ function searcher(query, mediaType = 'movie') {
         createPopup('Error occurred');
       });
   }
+
 
 
 
@@ -209,13 +316,26 @@ play_trailer.addEventListener("click", function() {
 
 
 searchIcon.addEventListener("click", () => {
-    if (isSearchBarVisible) {
-      searchBar.style.display = "none";
-      isSearchBarVisible = false;
-    } else {
-      searchBar.style.display = "flex";
-      isSearchBarVisible = true;
-    }
-  });
+  if (isSearchBarVisible) {
+    searchBar.style.display = "none";
+    isSearchBarVisible = false;
+  } else {
+    searchBar.style.display = "flex";
+    isSearchBarVisible = true;
+  }
+});
 
+searchBar.addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    searchMovies();
+  }
+});
+
+menuIcon.addEventListener('click', function() {
+  dropdownContent.classList.toggle('show');
+});
+
+logo.addEventListener('click', function() {
+  window.location = "../index.html";
+});
 

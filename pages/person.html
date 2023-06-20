@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/person.css">
+    <link href="https://fonts.cdnfonts.com/css/akzidenz-grotesk-next" rel="stylesheet">
+    <title id="page_name"></title>
+</head>
+    <body>
+        <div class="navbar flex_space_between">
+            <img id="logo" class="logo" src="../img/logo.png">
+            <div id="search" class="flex_centerer">
+              <input id="input" type="text" placeholder="Search for a movie, tv show, person...">
+            </div>
+            <ul class="flex_centerer">
+              <li class="flex_centerer"><a href="../index.html">Home</a></li>
+              <li class="flex_centerer"><a href="./explore.html">Expolore</a></li>
+              <li class="flex_centerer"><a href="#">Services</a></li>
+              <li class="flex_centerer"><img id="search-icon" src="../img/search.svg"></li>
+              <li class="drop_down">
+                <a href="#" class="menu-icon">&#9776;</a>
+                <div class="dropdown-content">
+                  <a href="../index.html">Home</a>
+                  <a href="../pages/explore.html">Expolore</a>
+                  <a href="#">Services</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        
+          <div id="search" class="flex_centerer">
+            <input type="text" placeholder="Search for a movie, tv show, person...">
+          </div>
+
+
+          <div class="mid flex_space_between">
+            <div id="actor_info" class="flex_centerer">
+                <div class="curtain"> </div>
+                <div id="actor_img" class="flex_centerer"> </div>
+                <div id="info"> </div>
+            </div>
+
+            <div class="flex_centerer">
+                <div class="movie-list" id="movie-list">
+
+                </div>
+
+            </div>
+
+          </div>
+
+
+
+          <footer>
+            <div class="footer"> 
+              <P>Movies, TV Shows &amp; other metadata from <a href="https://www.themoviedb.org/" title="Visit the TMDb(The Movie Database) Website">TMDb</a></P>
+            </div>
+            <p>&copy; 2023 Movie Blu-ray Disc Rental. All rights reserved.</p>
+          </footer>
+        
+          <script src="../script/person.js"></script>
+    </body>
+</html>

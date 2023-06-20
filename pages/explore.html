@@ -9,35 +9,45 @@
     <title>Explore</title>
 </head>
 <body>
-      <div>
-          <div class="title">
-              <h1>Movie Verse</h1>
-          </div>
-          
-          <div class="nav">
-            <ul>
-              <li><a href="../index.html">Home</a></li> 
-              <img id="search-icon" src="../img/search.svg">
-              <li><a href="#">Explore</a></li>
-            </ul>
-            
-            <div class="search-bar">
-              <input type="text" id="search-input" placeholder="Search movies...">
-              <button class="search-button" onclick="searchMovies()">Search</button>
-            </div>
-            
-          </div>
-          
-      
-          
-      <div>
-  <div class="container" id="container">
-      <div>
+  <div class="navbar flex_space_between">
+    <img id="logo" class="logo" src="../img/logo.png">
+    <ul class="flex_centerer">
+      <li class="flex_centerer"><a href="../index.html">Home</a></li>
+      <li class="flex_centerer"><a href="./explore.html">Explore</a></li>
+      <li class="flex_centerer"><a href="#">Services</a></li>
+      <li class="flex_centerer"><img id="search-icon" src="../img/search.svg"></li>
+      <li class="drop_down">
+        <a href="#" class="menu-icon">&#9776;</a>
+        <div class="dropdown-content">
+          <a href="../index.html">Home</a>
+          <a href="#">Explore</a>
+          <a href="#">Services</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div id="search" class="flex_centerer">
+    <input id="input" type="text" placeholder="Search for a movie, tv show, person...">
+  </div>
+
+  
+  <div class="container flex_space_between" id="container">
+      <div class="mid">
+        <div class="sorter">
+          <h1>Search Result</h1>
+          <button id="movie">Movie</button>
+          <button id="tv">Tv Shows</button>
+          <button id="person">Person</button>
+        </div>
+
+        
         <div class="movie-list-div">
           <div class="movie-list" id="movie-list">
 
           </div>
         </div>
+
       </div>
   
       <footer>
