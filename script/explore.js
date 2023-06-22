@@ -9,6 +9,10 @@ const movie = document.getElementById("movie");
 const tv = document.getElementById("tv");
 const person = document.getElementById("person");
 const logo = document.getElementById('logo');
+const explore = document.getElementById('explore');
+const index = document.getElementById('index');
+const explore1 = document.getElementById('explore1');
+const index1 = document.getElementById('index1');
 
 
 
@@ -59,7 +63,7 @@ function show_movie(jaison) {
           </div>
         `;
         if (poster_path === null) {
-          console.log('not enough info for this movie: ', movie);
+          console.log('not enough info');
         }else{
           new_movies.appendChild(comic_inf);
         }
@@ -67,6 +71,7 @@ function show_movie(jaison) {
     
         comic_inf.addEventListener("click", () => {
           localStorage.setItem("product", JSON.stringify(movie));
+          localStorage.removeItem('searched');
           window.location = "./product.html";
         });
       }
@@ -84,7 +89,7 @@ function show_movie(jaison) {
           </div>
         `;
         if (profile_path === null) {
-          console.log('not enough info for this movie: ', movie);
+          console.log('not enough info');
         }else{
           new_movies.appendChild(comic_inf);
         }
@@ -92,6 +97,7 @@ function show_movie(jaison) {
     
         comic_inf.addEventListener("click", () => {
           localStorage.setItem("person", JSON.stringify(id));
+          localStorage.removeItem('searched');
           window.location = "./person.html";
         });
       }
@@ -111,7 +117,7 @@ function show_movie(jaison) {
           </div>
         `;
         if (poster_path === null) {
-          console.log('not enough info for this movie: ', movie);
+          console.log('not enough info');
         }else{
           new_movies.appendChild(comic_inf);
         }
@@ -119,11 +125,8 @@ function show_movie(jaison) {
     
         comic_inf.addEventListener("click", () => {
           localStorage.setItem("product", JSON.stringify(movie));
-          window.location = "./product.html";
-        });
-
-        window.addEventListener('beforeunload', function() {
           localStorage.removeItem('searched');
+          window.location = "./product.html";
         });
       }
   
@@ -142,7 +145,6 @@ function show_movie(jaison) {
 
       if(media_type === "tv" && type === "tv"){
         const comic_inf = document.createElement("div");
-        console.log(movie);
         comic_inf.classList.add("movie-card");
   
         let truncatedDescription = overview.substring(0, maxLength) + " ...";
@@ -158,7 +160,7 @@ function show_movie(jaison) {
         `;
 
         if (poster_path === null) {
-          console.log('not enough info for this movie: ', movie);
+          console.log('not enough info');
         }else{
           new_movies.appendChild(comic_inf);
         }
@@ -166,6 +168,7 @@ function show_movie(jaison) {
     
         comic_inf.addEventListener("click", () => {
           localStorage.setItem("product", JSON.stringify(movie));
+          localStorage.removeItem('searched');
           window.location = "./product.html";
         });
       }
@@ -186,8 +189,7 @@ function show_movie(jaison) {
         `;
         
         if (poster_path === null || poster_path === undefined) {
-          console.log(poster_path);
-          console.log('not enough info for this movie: ', movie);
+          console.log('not enough info');
         }else{
           new_movies.appendChild(comic_inf);
         }
@@ -195,6 +197,7 @@ function show_movie(jaison) {
     
         comic_inf.addEventListener("click", () => {
           localStorage.setItem("product", JSON.stringify(movie));
+          localStorage.removeItem('searched');
           window.location = "./product.html";
         });
       }
@@ -212,7 +215,7 @@ function show_movie(jaison) {
           </div>
         `;
         if (profile_path === null) {
-          console.log('not enough info for this movie: ', movie);
+          console.log('not enough info');
         }else{
           new_movies.appendChild(comic_inf);
         }
@@ -220,6 +223,7 @@ function show_movie(jaison) {
     
         comic_inf.addEventListener("click", () => {
           localStorage.setItem("person", JSON.stringify(id));
+          localStorage.removeItem('searched');
           window.location = "./person.html";
         });
       }
@@ -236,10 +240,6 @@ function show_movie(jaison) {
       new_movies.style.backgroundColor = "#11111100";
       new_movies.appendChild(specialDiv);
     }
-
-    window.addEventListener('beforeunload', function() {
-      localStorage.removeItem('searched');
-    });
 
   }
 
@@ -279,7 +279,8 @@ function show_movie(jaison) {
     searcher(query)
       .then(results => {
         if (results.length > 0) {
-          show_movie(results);
+          localStorage.setItem("searched", JSON.stringify(results));
+          window.location = "./explore.html";
         } else {
           createPopup('Nothing found');
         }
@@ -341,4 +342,30 @@ function show_movie(jaison) {
 
   logo.addEventListener('click', function() {
     window.location = "../index.html";
+});
+
+index.addEventListener("click", function(event) {
+  event.preventDefault();
+  localStorage.removeItem('searched');
+  window.location = "../index.html";
+});
+
+explore.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  localStorage.removeItem('searched');
+  window.location = "./explore.html";
+});
+
+index1.addEventListener("click", function(event) {
+  event.preventDefault();
+  localStorage.removeItem('searched');
+  window.location = "../index.html";
+});
+
+explore1.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  localStorage.removeItem('searched');
+  window.location = "./explore.html";
 });

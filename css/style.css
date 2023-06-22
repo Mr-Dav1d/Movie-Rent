@@ -254,6 +254,7 @@ body {
 }
 
 .clickers button{
+  padding: 10px;
   margin-right: 40px;
   font-size: 17px;
   color: white;
@@ -262,7 +263,8 @@ body {
 }
 
 .clickers button:hover{
-  color: var(--second-color);
+  background-color: rgba(55, 0, 255, 0.297);
+  border-radius: 10px;
 }
 
 

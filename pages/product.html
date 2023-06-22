@@ -17,14 +17,14 @@
         <ul class="flex_centerer">
           <li class="flex_centerer"><a href="../index.html">Home</a></li>
           <li class="flex_centerer"><a href="./explore.html">Expolore</a></li>
-          <li class="flex_centerer"><a href="#">Services</a></li>
+          <li class="flex_centerer"><a href="./halloffame.html">Hall of Fame</a></li>
           <li class="flex_centerer"><img id="search-icon" src="../img/search.svg"></li>
           <li class="drop_down">
             <a href="#" class="menu-icon">&#9776;</a>
             <div class="dropdown-content">
               <a href="../index.html">Home</a>
-              <a href="../pages/explore.html">Expolore</a>
-              <a href="#">Services</a>
+              <a href="./explore.html">Expolore</a>
+              <a href="./halloffame.html">Hall of Fame</a>
             </div>
           </li>
         </ul>
@@ -34,21 +34,21 @@
         <input type="text" placeholder="Search for a movie, tv show, person...">
       </div>
 
-        <div class="container_mid">
+        <div class="container_mid flex_centerer">
 
-          <div class="buy" id="buy">
+          <div class="buy flex_centerer" id="buy">
             <div class="curtain"> </div>
               <div class="movie-card">
-                <div class="poster" id="poster"> </div>
+                <div class="poster flex_centerer" id="poster"> </div>
 
                 <div class="text">
-                    <div class="price">
-                      <h2 id="price">0.00</h2> <h2>$</h2>
+                    <div class="price flex_centerer">
+                      <h2 id="price">0.00</h2> <h2 id="value">$</h2>
                     </div>
 
-                    <div class="amounter">
+                    <div class="amounter flex_centerer">
                       <button id="minus">-</button>
-                      <div class="week">
+                      <div class="week flex_centerer">
                         <h2 id="week">1</h2> <h2>week</h2>
                       </div>
                       <button id="plus">+</button>
@@ -56,12 +56,13 @@
 
                     <button id="add_cart">Add to Cart</button>
                 </div>
+
               </div>
 
               <div class="overview">
                 <div class="top">
-                  <div> <h1 id="title"></h1> </div>
-                  <div class="genre_date">
+                  <div> <h1 id="title" class="flex_centerer"></h1> </div>
+                  <div class="genre_date flex_centerer">
                     <div id="language"></div>
 
                     <h3 id="date"></h3>
@@ -73,6 +74,7 @@
                     </ul>
 
                   </div>
+                  <div id="other_rent"></div>
       
                 </div>
 
@@ -94,7 +96,7 @@
                     <button id="seeFull">See all</button>
                   </div>
                   
-                  <ul id="cast">
+                  <ul id="cast" class="flex_centerer">
 
                   </ul>
 
@@ -107,20 +109,35 @@
           
           <div class="expanded">
             <div class="curtain"></div>
-            <div class="clickers" id="clickers">
-              <button id="move-left"> < </button>
-              <button id="move-right"> > </button>
+            <div class="titles" id="titles">
+              <h2>Top Billed Cast</h2>
+              <div class="clickers" id="clickers">
+                <button id="move-left"> < </button>
+                <button id="move-right"> > </button>
+              </div>
             </div>
             <div class="movie-list" id="movie-list">
   
             </div>
           </div>
           
-          <div class="trailer">
+          <div class="trailer flex_centerer" id="trailer">
             <div class="curtain"></div>
             <div id="videoPlayer">
               <iframe id="videoFrame" frameborder="0" allowfullscreen controls></iframe>
             </div>
+          </div>
+
+          <div class="recomend" id="recomend">
+            <div class="curtain"></div>
+            <div class="titles2 flex_space_between" id="titles2">
+              <h2>Recommendations</h2>
+              <div class="clickers2 flex_centerer" id="clickers">
+                <button id="move-left1"> < </button>
+                <button id="move-right1"> > </button>
+              </div>
+            </div>
+            <div class="movie-list2" id="movie-list-rec"></div>
           </div>
 
         </div>

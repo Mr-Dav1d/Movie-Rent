@@ -15,6 +15,7 @@ const menuIcon = document.querySelector('.menu-icon');
 const dropdownContent = document.querySelector('.dropdown-content');
 const logo = document.getElementById('logo');
 const hero_click = document.getElementById('hero_click');
+const new_full = document.getElementById('new');
 
 
 const API_URL_POP = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=225e69e6fd6663b3c629a8ea6adf8d7c&page=1";
@@ -120,7 +121,7 @@ function show_banner(jaison) {
 function show_movie(jaison) {
   new_movies.innerHTML = "";
 
-  jaison.forEach((movie) => {
+  jaison.slice(0, 10).forEach((movie) => {
     const comic_inf = document.createElement("div");
     const { id ,title, overview, poster_path } = movie;
 
@@ -148,12 +149,16 @@ function show_movie(jaison) {
       window.location = "./pages/product.html";
     });
   });
+  new_full.addEventListener('click', function() {
+    localStorage.setItem("searched", JSON.stringify(jaison));
+    window.location = "./pages/explore.html";
+  });
 }
 
 function show_soon(jaison) {
     soon_movies.innerHTML = "";
   
-    jaison.forEach((movie) => {
+    jaison.slice(0, 10).forEach((movie) => {
       const comic_inf = document.createElement("div");
       const { title, overview, poster_path, release_date } = movie;
   
@@ -177,6 +182,10 @@ function show_soon(jaison) {
       }else{
         soon_movies.appendChild(comic_inf);
       }
+      comic_inf.addEventListener("click", () => {
+        localStorage.setItem("product", JSON.stringify(movie));
+        window.location = "./pages/product.html";
+      });
       
       comic_inf.addEventListener("click", () => {
           createPopup("Movie Will be Released: " + release_date);
