@@ -8,6 +8,7 @@ const logo = document.getElementById('logo');
 const actor_img = document.getElementById('actor_img');
 const info = document.getElementById('info');
 const actor_list = document.getElementById('movie-list');
+const seeFull = document.getElementById('seeFull');
 
 
 const searched_p = localStorage.getItem("person");
@@ -23,12 +24,13 @@ const url_famous_for = `https://api.themoviedb.org/3/person/${actor_id}/combined
 
 let isSearchBarVisible = false;
 let isDropVisible = false;
+let isFullVisible = false;
 const maxLength_Bio = 1000;
 const maxLength = 280;
 
 
 importActor(url_actor_info);
-importFamous(url_famous_for);
+importFamous(url_famous_for, "less");
 
 async function importActor(url) {
     const data = await fetch(url);
@@ -37,7 +39,7 @@ async function importActor(url) {
     showActor(jaison);
   }
 
-async function importFamous(url) {
+async function importFamous(url, sho) {
     const data = await fetch(url);
     const jaison = await data.json();
 
@@ -59,8 +61,12 @@ async function importFamous(url) {
     });
 
     const sortedMedia = uniqueMedia.sort((a, b) => b.popularity - a.popularity);
+    let topMedia = sortedMedia;
 
-    const topMedia = sortedMedia.slice(0, 8);
+    if(sho === "less"){
+      topMedia = sortedMedia.slice(0, 8);
+    }
+    
     console.log(topMedia);
     showMovies(topMedia);
 }
@@ -256,4 +262,16 @@ function searcher(query, mediaType = 'multi') {
   
   logo.addEventListener('click', function() {
     window.location = "../index.html";
+  });
+
+  seeFull.addEventListener('click', function() {
+    if (isFullVisible) {
+      importFamous(url_famous_for, "less");
+      seeFull.textContent = "See all";
+      isFullVisible = false;
+    } else {
+      importFamous(url_famous_for, "");
+      seeFull.textContent = "See less";
+      isFullVisible = true;
+    }
   });

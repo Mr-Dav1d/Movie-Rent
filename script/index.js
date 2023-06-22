@@ -14,6 +14,7 @@ const soonRightBtn = document.getElementById('soon-right');
 const menuIcon = document.querySelector('.menu-icon');
 const dropdownContent = document.querySelector('.dropdown-content');
 const logo = document.getElementById('logo');
+const hero_click = document.getElementById('hero_click');
 
 
 const API_URL_POP = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=225e69e6fd6663b3c629a8ea6adf8d7c&page=1";
@@ -59,6 +60,15 @@ async function importBanner(url){
     show_banner(jaison.results);
 }
 
+async function banner_movie(id){
+  const link = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`;
+  const data = await fetch(link);
+  const jaison = await data.json();
+  localStorage.setItem("product", JSON.stringify(jaison));
+  window.location = "./pages/product.html";
+}
+
+
 
 
 
@@ -75,6 +85,7 @@ function popular_list(jaison) {
 
 function show_banner(jaison) {
     popular_list(jaison);
+    let id = "";
     
   
     function setBanner() {
@@ -92,24 +103,17 @@ function show_banner(jaison) {
                   circle.classList.remove('active');
                 }
               });
-
+            let id = jaison[index].id;
             index++;
             bannerTimeout = setTimeout(setBanner, 5000);
       }
     }
+    hero_click.addEventListener("click", () => {
+      banner_movie(jaison[index-1].id);
+    });
   
     setBanner();
   }
-
-function updateCircleColors() {
-circles.forEach((circle, circleIndex) => {
-    if (circleIndex === index) {
-    circle.classList.add('active');
-    } else {
-    circle.classList.remove('active');
-    }
-});
-}
 
 
 
@@ -144,8 +148,6 @@ function show_movie(jaison) {
       window.location = "./pages/product.html";
     });
   });
-  const picture_banner = IMG_PATH + jaison[0].backdrop_path;
-  divElement.style.backgroundImage = `url(${picture_banner})`;
 }
 
 function show_soon(jaison) {
@@ -180,8 +182,6 @@ function show_soon(jaison) {
           createPopup("Movie Will be Released: " + release_date);
       });
     });
-    const picture_banner = IMG_PATH + jaison[0].backdrop_path;
-    divElement.style.backgroundImage = `url(${picture_banner})`;
   }
 
 

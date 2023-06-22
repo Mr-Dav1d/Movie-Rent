@@ -279,8 +279,7 @@ function show_movie(jaison) {
     searcher(query)
       .then(results => {
         if (results.length > 0) {
-          localStorage.setItem("searched", JSON.stringify(results));
-          window.location = "./explore.html";
+          show_movie(results);
         } else {
           createPopup('Nothing found');
         }

@@ -1,3 +1,7 @@
+:root {
+  --main-color: #2B3784;
+  --second-color: #11194d;
+}
 
 *, p, h1, a {
   margin: 0;
@@ -42,7 +46,7 @@ body {
 
 
 .navbar {
-  background-color: #3f0063;
+  background-color: var(--main-color);
   font-family: 'Akzidenz-Grotesk Next', sans-serif;
   overflow: hidden;
   padding: 0 15px;
@@ -98,7 +102,7 @@ body {
 
 .dropdown-content {
   display: none;
-  background-color: #3f0063;
+  background-color: var(--main-color);
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
@@ -114,7 +118,7 @@ body {
 
 
 .dropdown-content a:hover {
-  background-color: #1d002e;
+  background-color: var(--second-color);
 }
 
 
@@ -163,6 +167,12 @@ body {
   background-size: cover;
 }
 
+#hero_click{
+  width: 100%;
+  height: 90%;
+  align-self: flex-start;
+}
+
 .hero img {
   width: 50px;
   height: auto;
@@ -190,15 +200,15 @@ body {
 }
 
 .circle:hover{
-  background-color: #3f0063;
+  background-color: var(--main-color);
 }
 
 .circle.active {
-  background-color: #3f0063; 
+  background-color: var(--main-color); 
 }
 
 .circle.active:hover {
-  background-color: #3f0063; 
+  background-color: var(--main-color); 
 }
 
 
@@ -252,7 +262,7 @@ body {
 }
 
 .clickers button:hover{
-  color: #ff0000;
+  color: var(--second-color);
 }
 
 
@@ -263,7 +273,7 @@ body {
   transition: transform 0.3s;
   width: auto;
   height: 650px;
-  background-color: #222;
+  background-color: var(--second-color);
   margin-bottom: 0px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -336,7 +346,7 @@ body {
 
 
 footer {
-  background-color: #222;
+  background-color: var(--main-color);
   padding: 20px 0;
   text-align: center;
 }
@@ -353,7 +363,7 @@ footer a{
 }
 
 footer a:hover{
-  color: #ff0000;
+  color: var(--second-color);
 }
 
 
@@ -421,7 +431,7 @@ footer a:hover{
     transition: transform 0.3s;
     width: auto;
     height: 444px;
-    background-color: #222;
+    background-color: var(--second-color);
     margin-bottom: 0px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -536,7 +546,7 @@ footer a:hover{
     }
 
   .navbar {
-    background-color: #3f0063b3;
+    background-color: var(--main-color)b3;
     flex-direction: column;
     font-family: 'Akzidenz-Grotesk Next', sans-serif;
     overflow: hidden;

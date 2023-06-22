@@ -21,6 +21,11 @@ const cast = document.getElementById("cast");
 const menuIcon = document.querySelector('.menu-icon');
 const dropdownContent = document.querySelector('.dropdown-content');
 const logo = document.getElementById('logo');
+const new_movies = document.getElementById("movie-list");
+const seeFull = document.getElementById("seeFull");
+const moveLeftBtn = document.getElementById('move-left');
+const moveRightBtn = document.getElementById('move-right');
+const clickers = document.getElementById('clickers');
 
 
 
@@ -33,21 +38,20 @@ const genre_url = 'https://api.themoviedb.org/3/genre/movie/list?api_key=225e69e
 
 const movie_id = productInfo.id;
 const API_URL_video = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
+let media_typee = "";
 
 
 const genreNames = [];
 let isSearchBarVisible = false;
 let isDropVisible = false;
-
-
-
-
-
+let isCastBarVisible = false;
 
 
 
 
 importMovieVideo(API_URL_video);
+
+
 
 async function importCast(url){
     const data = await fetch(url);
@@ -69,9 +73,32 @@ async function importMovieVideo(url) {
     const data = await fetch(url);
     const jaison = await data.json();
     const video = jaison.results; 
-    importGenre(genre_url, productInfo.genre_ids);
+    if(productInfo.genre_ids){
+      importGenre(genre_url, productInfo.genre_ids);
+    }
+    else{
+      const genreIds = productInfo.genres.map(genre => genre.id);
+      importGenre(genre_url, genreIds);
+    }
+    
     show_video(video);
     
+}
+
+async function importCastFull() {
+  let API_CAST = "";
+  API_CAST = `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${apiKey}`;
+  if(media_typee === "tv"){
+    API_CAST = `https://api.themoviedb.org/3/tv/${movie_id}/credits?api_key=${apiKey}`;
+  }
+  if(media_typee === "movie"){
+    API_CAST = `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${apiKey}`;
+  }
+  const data = await fetch(API_CAST);
+  const data2 = await fetch(data.url);
+  const jaison_cast = await data2.json();
+  show_cast(jaison_cast.cast);
+  
 }
 
 
@@ -93,6 +120,7 @@ function genre_getter(list, genreIds){
 async function show_product(jaison, genreNames) {
     const currentYear = new Date().toISOString().split('T')[0].slice(0, 4);
     const { id,title, release_date, poster_path, original_language, backdrop_path, vote_average, overview, media_type, first_air_date, name} = jaison;
+    media_typee = media_type;
     let API_CAST = "";
     API_CAST = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`;
     if(media_type === "tv"){
@@ -102,7 +130,6 @@ async function show_product(jaison, genreNames) {
       API_CAST = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`;
     }
     const castData = await importCast(API_CAST);
-    console.log(castData);
     const casti = castData.slice(0, 6);
     let index = 0;
 
@@ -278,6 +305,35 @@ function searcher(query, mediaType = 'multi') {
 
 
 
+  function show_cast(jaison) {
+    new_movies.innerHTML = "";
+  
+    jaison.forEach((each) => {
+      const comic_inf = document.createElement("div");
+  
+      comic_inf.classList.add("actor-card");
+  
+      comic_inf.innerHTML = `
+        <div class="poster">
+          <img src="${IMG_PATH + each.profile_path}" alt="Movie 3">
+        </div>
+        <div class="text">
+            <h3 class="name">${each.name}</h3>
+            <p class="desc">${each.character}</p>
+        </div>
+      `;
+      if (each.profile_path === null) {
+        console.log('not enough info');
+      }else{
+        new_movies.appendChild(comic_inf);
+      }
+  
+      comic_inf.addEventListener("click", () => {
+        localStorage.setItem("person", JSON.stringify(each.id));
+        window.location = "./person.html";
+      });
+    });
+  }
 
 
 
@@ -337,5 +393,26 @@ menuIcon.addEventListener('click', function() {
 
 logo.addEventListener('click', function() {
   window.location = "../index.html";
+});
+
+seeFull.addEventListener('click', function() {
+  if (isCastBarVisible) {
+    new_movies.style.display = "none";
+    clickers.style.display = "none";
+    isCastBarVisible = false;
+  } else {
+    new_movies.style.display = "flex";
+    clickers.style.display = "flex";
+    isCastBarVisible = true;
+  }
+  importCastFull();
+});
+
+moveLeftBtn.addEventListener('click', () => {
+  new_movies.scrollBy({ left: -700, behavior: 'smooth' }); 
+});
+
+moveRightBtn.addEventListener('click', () => {
+  new_movies.scrollBy({ left: 700, behavior: 'smooth' }); 
 });
 

@@ -1,3 +1,8 @@
+:root {
+  --main-color: #2B3784;
+  --second-color:  #11194d;
+}
+
 *, p, h1, a {
   margin: 0;
   padding: 0;
@@ -30,7 +35,7 @@ body {
   
   
   .navbar {
-    background-color: #3f0063;
+    background-color: var(--main-color);
     font-family: 'Akzidenz-Grotesk Next', sans-serif;
     overflow: hidden;
     padding: 0 15px;
@@ -86,7 +91,7 @@ body {
   
   .dropdown-content {
     display: none;
-    background-color: #3f0063a8;
+    background-color: var(--main-color);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   }
@@ -102,7 +107,7 @@ body {
   
   
   .dropdown-content a:hover {
-    background-color: #1d002e;
+    background-color: var(--second-color);
   }
   
   
@@ -160,7 +165,7 @@ body {
   .sorter h1{
     font-size: 20px;
     padding: 20px;
-    background-color: #3f0063e7;
+    background-color: var(--main-color);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
@@ -208,7 +213,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     color: white;
     flex: 0 0 auto;
-    background-color: #393939;
+    background-color: var(--second-color);
   }
   
   .poster{
@@ -291,7 +296,7 @@ body {
   
   footer {
     width: 100%;
-    background-color: #222;
+    background-color: var(--main-color);
     padding: 20px 0;
     text-align: center;
     justify-self: end;
@@ -309,7 +314,7 @@ body {
   }
   
   footer a:hover{
-    color: #ff0000;
+    color: var(--second-color);
   }
 
 
@@ -390,7 +395,7 @@ body {
     .sorter h1{
       font-size: 10px;
       padding: 20px;
-      background-color: #3f0063;
+      background-color: var(--main-color);
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
     }
@@ -407,7 +412,7 @@ body {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       color: white;
       flex: 0 0 auto;
-      background-color: #393939;
+      background-color: var(--second-color);
     }
 
   }
@@ -429,28 +434,7 @@ body {
       margin-bottom: 10px;
     }
     
-    #search-input {
-      padding: 10px;
-      font-size: 10px;
-      width: 100px;
-      border-color: white;
-      border-radius: 4px;
-      color: white;
-      background-color: #111;
-    }
-  
-    .search-button {
-      width: 100px;
-      background-color: #ff0000;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      margin-left: 10px;
-      font-size: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
-    }
+
   
     .title_in{
       display: flex;
@@ -486,18 +470,6 @@ body {
       color: #eee;
       text-decoration: none;
       font-size: 10px;
-    }
-    .search-button {
-      width: 70px;
-      background-color: #ff0000;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      margin-left: 5px;
-      font-size: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
     }
   
     .clickers button{

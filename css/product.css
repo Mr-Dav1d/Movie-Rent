@@ -1,3 +1,8 @@
+:root {
+  --main-color: #2B3784;
+  --second-color:  #11194d;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +14,7 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.5;
     color: #eee;
-    background-color: #111;
+    background-color: var(--main-color);
     height: 100%;
   }
 
@@ -41,7 +46,7 @@ body {
   
   
   .navbar {
-    background-color: #3f0063;
+    background-color: var(--main-color);
     font-family: 'Akzidenz-Grotesk Next', sans-serif;
     overflow: hidden;
     padding: 0 15px;
@@ -92,7 +97,7 @@ body {
   
   .dropdown-content {
     display: none;
-    background-color: #3f0063a8;
+    background-color: var(--main-color);
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   }
@@ -108,7 +113,7 @@ body {
   
   
   .dropdown-content a:hover {
-    background-color: #1d002e;
+    background-color: var(--second-color);
   }
   
   
@@ -148,7 +153,7 @@ body {
   
 
 .container_mid{
-    background-color: rgb(57, 55, 55);
+    background-color: var(--main-color);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -184,7 +189,7 @@ body {
     z-index: 2;
   }
 
-.poster{
+#poster{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,7 +198,7 @@ body {
     overflow: hidden;
 }
 
-.poster img {   
+#poster img {   
     width: auto; 
     max-height: 100%; 
     object-fit: cover;
@@ -265,7 +270,7 @@ body {
 
   
 button {
-    background-color: #3f0063;
+    background-color: var(--main-color);
     color: white;
     border: none;
     border-radius: 5px;
@@ -276,7 +281,7 @@ button {
 }
 
 button:hover {
-    background-color: #28013e;
+    background-color: var(--second-color);
 }
 
 
@@ -381,6 +386,7 @@ button:hover {
 
 .bottom{
     width: 100%;   
+    padding-right: 20px;
 }
 
 .bottom h2{
@@ -439,6 +445,144 @@ button:hover {
   font-size: 15px;
 }
 
+.expanded{
+  position: relative;
+  background-image: url(../img/back.jpg);
+  width: 100%;
+  overflow-x: auto;
+  padding: 0 20px; 
+}
+
+#seeFull{
+  font-size: 17px;
+  color: white;
+  border: none;
+  background-color: transparent;
+}
+
+#seeFull:hover{
+  background-color: rgba(0, 0, 0, 0.297);
+  filter: brightness(80%); 
+  border-radius: 10px;
+}
+
+
+.clickers{
+  display: none;
+  justify-content: end;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.clickers button{
+  z-index: 3;
+  margin-right: 40px;
+  font-size: 17px;
+  color: white;
+  border: none;
+  background-color: transparent;
+}
+
+.clickers button:hover{
+  background-color: rgba(55, 0, 255, 0.297);
+  border-radius: 10px;
+}
+
+.movie-list {
+  gap: 15px;
+  margin-top: 10px;
+  padding: 0px 0px 20px 0px;
+  display: none;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0.725);
+}
+
+.movie-list::-webkit-scrollbar {
+  display: none;
+}
+
+.actor-card {
+  position: relative;
+  perspective: 1000px;
+  transition: transform 0.3s;
+  width: auto;
+  height: 450px;
+  background-color: transparent;
+  margin-bottom: 0px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+  flex: 0 0 auto;
+  margin-right: 10px; 
+  margin-left: 10px;
+  z-index: 3;
+}
+
+.poster{
+  width: auto;
+  height: 440px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.poster img {
+  margin-top: 5px;
+  max-width: auto; 
+  max-height: 100%; 
+  object-fit: cover;
+}
+
+.text{
+  height: 100%;
+  width: 100%;
+}
+
+
+.actor-card h3 {
+  text-align: center;
+  height: 50px;
+  width: 270px; 
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.actor-card p {
+  font-size: 16px;
+  text-align: center;
+  width: 270px; 
+}
+.actor-card h3,
+.actor-card p {
+  opacity: 0; 
+  transition: opacity 0.3s ease-in-out; 
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.actor-card:hover h3,
+.actor-card:hover p {
+  opacity: 1; 
+}
+
+.actor-card:hover .poster{
+  filter: brightness(30%); 
+}
+
+.actor-card:hover h3, .actor-card h3{
+  top: 15%;
+  left: 50%;
+}
+
+.actor-card:hover p, .actor-card p{
+  top: 55%;
+  left: 50%;
+}
+
+
 
 
 
@@ -473,7 +617,7 @@ button:hover {
 
 
 footer {
-    background-color: #222;
+    background-color: var(--main-color);
     padding: 20px 0;
     text-align: center;
   }
@@ -490,7 +634,7 @@ footer a{
 }
 
 footer a:hover{
-    color: #3f0063;
+    color: var(--second-color);
 }
 
 
@@ -587,14 +731,6 @@ footer a:hover{
         height: 650px;
     }
 
-    .poster{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: auto;
-      height: 450px;
-      overflow: hidden;
-  }
     
 }
 
@@ -653,6 +789,9 @@ footer a:hover{
         color: rgba(255, 255, 255, 0.849);
         font-weight: lighter;
     }
+
+    
+
 
       
 }
@@ -733,21 +872,6 @@ footer a:hover{
         color: white;
         background-color: #111;
       }
-    
-      .search-button {
-        width: 100px;
-        background-color: #ff0000;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        margin-left: 10px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease-in-out;
-      }
-
-
 
       .overview{
         display: flex;
@@ -823,7 +947,7 @@ footer a:hover{
     }
 
     .navbar {
-      background-color: #3f0063b3;
+      background-color: var(--main-color);
       flex-direction: column;
       font-family: 'Akzidenz-Grotesk Next', sans-serif;
       overflow: hidden;
@@ -874,21 +998,7 @@ footer a:hover{
       color: white;
       background-color: #111;
     }
-  
-    .search-button {
-      width: 100px;
-      background-color: #ff0000;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      margin-left: 10px;
-      font-size: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease-in-out;
-    }
     
-
   }
   
   @media screen and (max-width: 350px) {
