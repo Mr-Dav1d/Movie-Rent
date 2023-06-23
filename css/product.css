@@ -92,6 +92,10 @@
   min-width:160px;
   box-shadow:0 8px 16px 0 rgba(0,0,0,0.2)
   }
+
+  .dropdown-content.show {
+    display: block;
+  }
   
   .dropdown-content a {
   color:#333;
@@ -103,6 +107,9 @@
   
   .dropdown-content a:hover {
   background-color:var(--second-color)
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
   }
   
   #search {
@@ -173,7 +180,6 @@
   }
   
   .text:hover,.text {
-  display:flex;
   flex-direction:column;
   justify-content:space-evenly;
   align-items:center;
@@ -190,7 +196,7 @@
   }
   
   .movie-card:hover h2,.movie-card:hover button {
-  opacity:1
+  opacity:1;
   }
   
   #title {
@@ -425,6 +431,7 @@
   }
   
   .titles2 {
+  flex-wrap: wrap;
   z-index:2;
   margin-top:10px
   }
@@ -455,16 +462,15 @@
   z-index:2;
   margin-top:10px
   }
+
+  .titles h2{
+    z-index: 2;
+  }
   
   .clickers {
   display:none;
   justify-content:center;
   align-items:center
-  }
-  
-  .titles h2 {
-  z-index:2;
-  color:#fff
   }
   
   .clickers button {
@@ -541,21 +547,21 @@
   margin-top:5px;
   max-width:auto;
   max-height:100%;
-  object-fit:cover
+  object-fit:cover;
   }
   
   .actor-card h3 {
   text-align:center;
   height:50px;
-  width:270px;
-  font-size:20px;
+  width:85%;
+  font-size:19px;
   margin-bottom:15px
   }
   
   .actor-card p {
-  font-size:16px;
+  font-size:15px;
   text-align:center;
-  width:270px
+  width:75%;
   }
   
   .actor-card h3,.actor-card p {
@@ -563,11 +569,11 @@
   transition:opacity .3s ease-in-out;
   position:absolute;
   transform:translate(-50%,-50%);
-  z-index:1
+  z-index:1;
   }
   
   .actor-card:hover h3,.actor-card:hover p {
-  opacity:1
+  opacity:1;
   }
   
   .actor-card:hover .poster {
@@ -775,6 +781,11 @@
   z-index:2;
   flex-shrink:0
   }
+
+  #poster {
+    height:450px;
+    margin-bottom:20px
+    }
   }
   
   @media screen and (max-width: 600px) {
@@ -851,6 +862,16 @@
   .navbar ul a {
   display:none
   }
+  #poster {
+    height:350px;
+    margin-bottom:20px
+    }
+  .titles2 {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+    
   }
   
   @media screen and (max-width: 350px) {

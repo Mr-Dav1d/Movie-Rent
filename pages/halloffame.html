@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall_Of_Fame</title>
+    <link rel="stylesheet" href="../css/halloffame.css">
+    <link href="https://fonts.cdnfonts.com/css/akzidenz-grotesk-next" rel="stylesheet">
+</head>
+    <body>
+        <div class="navbar flex_space_between no_shrink">
+            <img id="logo" class="logo" src="../img/logo.png">
+            <div id="search" class="flex_centerer">
+              <input id="input" type="text" placeholder="Search for a movie, tv show, person...">
+            </div>
+            <ul class="flex_centerer">
+              <li class="flex_centerer"><a href="../index.html">Home</a></li>
+              <li class="flex_centerer"><a href="./explore.html">Expolore</a></li>
+              <li class="flex_centerer"><a href="#">Hall of Fame</a></li>
+              <li class="flex_centerer"><img id="search-icon" src="../img/search.svg"></li>
+              <li class="drop_down">
+                <a href="#" class="menu-icon">&#9776;</a>
+                <div class="dropdown-content">
+                  <a href="../index.html">Home</a>
+                  <a href="./explore.html">Expolore</a>
+                  <a href="#">Hall of Fame</a>
+                </div>
+              </li>
+            </ul>
+        </div>
+
+
+        <div class="movie-list-div">
+          <div class="movie-list" id="movie-list">
+
+          </div>
+        </div>
+
+        
+        <footer class="no_shrink">
+            <div class="footer"> 
+              <P>Movies, TV Shows &amp; other metadata from <a href="https://www.themoviedb.org/" title="Visit the TMDb(The Movie Database) Website">TMDb</a></P>
+            </div>
+            <p>&copy; 2023 Movie Blu-ray Disc Rental. All rights reserved.</p>
+        </footer>
+
+        <script src="../script/halloffame.js"></script>
+    </body>
+</html>

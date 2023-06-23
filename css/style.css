@@ -251,6 +251,7 @@ body {
 
 .clickers{
   display: flex;
+  flex-wrap: wrap;
 }
 
 .clickers button{
@@ -321,15 +322,16 @@ body {
 .movie-card h3,
 .movie-card p {
   opacity: 0; 
-  transition: opacity 0.3s ease-in-out; 
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
   position: absolute;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.5);
   z-index: 1;
 }
 
 .movie-card:hover h3,
 .movie-card:hover p {
   opacity: 1; 
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .movie-card:hover .poster{
@@ -548,11 +550,12 @@ footer a:hover{
     }
 
   .navbar {
-    background-color: var(--main-color)b3;
+    background-color: var(--main-color);
     flex-direction: column;
     font-family: 'Akzidenz-Grotesk Next', sans-serif;
     overflow: hidden;
     padding: 0 15px;
+    margin-bottom: 36px;
   }
 
   .navbar .dropdown-content.show{
@@ -577,12 +580,10 @@ footer a:hover{
   .navbar ul a{
       display: none;
     }
-  .nav a {
-    display: block;
-    color: #eee;
-    text-decoration: none;
-    font-size: 12px;
-  }
+
+    .navbar h1{
+      font-size: 20px;
+     }
 
   .circles-container {
     position: absolute;
@@ -593,9 +594,7 @@ footer a:hover{
     gap: 10px;
   }
 
-  .navbar h1{
-   font-size: 20px;
-  }
+ 
   .clickers button{
     margin-right: 10px;
     font-size: 12px;

@@ -32,6 +32,7 @@ let index = 0;
 let bannerTimeout;
 let isSearchBarVisible = false;
 let isDropVisible = false;
+let wid;
 
 
 
@@ -153,6 +154,8 @@ function show_movie(jaison) {
     localStorage.setItem("searched", JSON.stringify(jaison));
     window.location = "./pages/explore.html";
   });
+  const containerWidth = document.querySelector('.movie-card').clientWidth;
+  wid = containerWidth;
 }
 
 function show_soon(jaison) {
@@ -191,6 +194,8 @@ function show_soon(jaison) {
           createPopup("Movie Will be Released: " + release_date);
       });
     });
+    const containerWidth = document.querySelector('.movie-card').clientWidth;
+    wid = containerWidth;
   }
 
 
@@ -288,20 +293,36 @@ searchIcon.addEventListener("click", () => {
 
 
 moveLeftBtn.addEventListener('click', () => {
-  new_movies.scrollBy({ left: -700, behavior: 'smooth' }); 
+  const itemWidth = wid; 
+  const containerWidth = new_movies.clientWidth;
+  const scrollAmount = Math.floor(containerWidth / itemWidth) * itemWidth / 2;
+  
+  new_movies.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); 
 });
 
 moveRightBtn.addEventListener('click', () => {
-  new_movies.scrollBy({ left: 700, behavior: 'smooth' }); 
+  const itemWidth = wid;
+  const containerWidth = new_movies.clientWidth;
+  const scrollAmount = Math.floor(containerWidth / itemWidth) * itemWidth / 2; 
+  
+  new_movies.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 });
 
 
 soonLeftBtn.addEventListener('click', () => {
-  soon_movies.scrollBy({ left: -700, behavior: 'smooth' }); 
+  const itemWidth = wid; 
+  const containerWidth = soon_movies.clientWidth;
+  const scrollAmount = Math.floor(containerWidth / itemWidth) * itemWidth / 2;
+  
+  soon_movies.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); 
 });
 
 soonRightBtn.addEventListener('click', () => {
-  soon_movies.scrollBy({ left: 700, behavior: 'smooth' }); 
+  const itemWidth = wid;
+  const containerWidth = soon_movies.clientWidth;
+  const scrollAmount = Math.floor(containerWidth / itemWidth) * itemWidth / 2; 
+  
+  soon_movies.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 });
 
 

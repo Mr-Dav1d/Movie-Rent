@@ -18,6 +18,7 @@ const index1 = document.getElementById('index1');
 
 const searched = localStorage.getItem("searched");
 const searchedInfo = JSON.parse(searched);
+console.log(searchedInfo);
 
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280/";
 const apiKey = '225e69e6fd6663b3c629a8ea6adf8d7c';

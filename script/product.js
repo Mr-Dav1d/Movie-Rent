@@ -36,6 +36,7 @@ const movie_list_rec = document.getElementById('movie-list-rec');
 const recomend = document.getElementById('recomend');
 const trailer = document.getElementById('trailer');
 const titles2 = document.getElementById('titles2');
+let wid;
 
 
 
@@ -47,8 +48,17 @@ const IMG_PATH = "https://image.tmdb.org/t/p/w1280/";
 const genre_url = 'https://api.themoviedb.org/3/genre/movie/list?api_key=225e69e6fd6663b3c629a8ea6adf8d7c'
 
 const movie_id = productInfo.id;
-const API_URL_video = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
+
 let media_typee = "";
+if(productInfo.media_type === "" || typeof productInfo.media_type === "undefined"){
+  const tpy = localStorage.getItem("type");
+  localStorage.removeItem("type")
+  const tp = JSON.parse(tpy);
+  media_typee = tp;
+}
+else{
+  media_typee = productInfo.media_type;
+}
 
 const API_URL_OTHER_RENT = `https://api.themoviedb.org/3/movie/${movie_id}/watch/providers?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
 
@@ -60,9 +70,8 @@ let isDropVisible = false;
 let isCastBarVisible = false;
 
 
-importMovieVideo(API_URL_video);
+importMovieVideo();
 other_rent(API_URL_OTHER_RENT);
-importRec();
 
 
 
@@ -79,11 +88,17 @@ async function importGenre(url, movie_genre) {
     const jaison = await data2.json();
     genre_getter(jaison, movie_genre);
     show_product(productInfo, genreNames);
+    importRec();
     
 }
 
-async function importMovieVideo(url) {
-    const data = await fetch(url);
+async function importMovieVideo() {
+    let API_URL_video = "";
+    API_URL_video = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
+    if(media_typee === "tv"){
+      API_URL_video = `https://api.themoviedb.org/3/tv/${movie_id}/videos?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
+    }
+    const data = await fetch(API_URL_video);
     const jaison = await data.json();
     const video = jaison.results; 
     if(productInfo.genre_ids){
@@ -105,9 +120,6 @@ async function importCastFull() {
   if(media_typee === "tv"){
     API_CAST = `https://api.themoviedb.org/3/tv/${movie_id}/credits?api_key=${apiKey}`;
   }
-  if(media_typee === "movie"){
-    API_CAST = `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${apiKey}`;
-  }
   const data = await fetch(API_CAST);
   const data2 = await fetch(data.url);
   const jaison_cast = await data2.json();
@@ -119,7 +131,7 @@ async function other_rent(url){
   const data = await fetch(url);
   const data2 = await fetch(data.url);
   const jaison_other = await data2.json();
-  const jaison = jaison_other.results.US.rent
+  const jaison = jaison_other.results.US.rent;
   const link_tmdb = jaison_other.results.US.link;
   show_other_rent(jaison, link_tmdb);
 
@@ -127,12 +139,9 @@ async function other_rent(url){
 
 async function importRec() {
   let API_URL_REC = "";
-  API_URL_REC = `https://api.themoviedb.org/3/movie/${movie_id}/similar?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
+  API_URL_REC = `https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
   if(media_typee === "tv"){
-    API_URL_REC = `https://api.themoviedb.org/3/tv/${movie_id}/similar?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
-  }
-  if(media_typee === "movie"){
-    API_URL_REC = `https://api.themoviedb.org/3/movie/${movie_id}/similar?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
+    API_URL_REC = `https://api.themoviedb.org/3/tv/${movie_id}/recommendations?api_key=225e69e6fd6663b3c629a8ea6adf8d7c`;
   }
   const data = await fetch(API_URL_REC);
   const data2 = await fetch(data.url);
@@ -159,15 +168,12 @@ function genre_getter(list, genreIds){
 async function show_product(jaison, genreNames) {
     const currentYear = new Date().toISOString().split('T')[0].slice(0, 4);
     const { id,title, release_date, poster_path, original_language, backdrop_path, vote_average, overview, media_type, first_air_date, name} = jaison;
-    media_typee = media_type;
     let API_CAST = "";
     API_CAST = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`;
-    if(media_type === "tv"){
+    if(media_typee === "tv"){
       API_CAST = `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`;
     }
-    if(media_type === "movie"){
-      API_CAST = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}`;
-    }
+    
     const castData = await importCast(API_CAST);
     const casti = castData.slice(0, 6);
     let index = 0;
@@ -192,7 +198,7 @@ async function show_product(jaison, genreNames) {
     });
 
 
-    if(media_type === "tv"){
+    if(media_typee === "tv"){
       const first_air_dat = parseInt(first_air_date.slice(0, 4), 10)
       const date1 = new Date(first_air_date);
       const date2 = new Date(new Date().toISOString().split('T')[0]);
@@ -308,7 +314,7 @@ function show_video(jaison){
     let key_one;
     jaison.forEach((movie) => {
         const { name, key } = movie;
-        if (name.includes("trailer") || name.includes("Trailer")){
+        if (name.includes("trailer") || name.includes("Trailer") || name.includes("teaser") || name.includes("Teaser")){
             key_one = key;
             
         }
@@ -412,7 +418,7 @@ function searcher(query, mediaType = 'multi') {
         <img src="${IMG_PATH + each.logo_path}" alt="Movie 3">
       `;
       if (each.logo_path === null) {
-        console.log('not enough info for this movie: ', jaison);
+        console.log('not enough info');
       }else{
         other_rent_div.appendChild(comic_inf);
       }
@@ -433,6 +439,10 @@ function searcher(query, mediaType = 'multi') {
     else{
    
       jaison.forEach((each) => {
+        let titl = each.title;
+        if(media_typee === "tv"){
+          titl = each.name;
+        }
         const comic_inf = document.createElement("div");
   
         let truncatedDescription = each.overview.substring(0, maxLength) + " ...";
@@ -444,7 +454,7 @@ function searcher(query, mediaType = 'multi') {
             <img src="${IMG_PATH + each.poster_path}" alt="Movie 3">
           </div>
           <div class="text">
-              <h3 class="name">${each.title}</h3>
+              <h3 class="name">${titl}</h3>
               <p class="desc">${truncatedDescription}</p>
           </div>
         `;
@@ -459,6 +469,8 @@ function searcher(query, mediaType = 'multi') {
           window.location = "./product.html";
         });
       });
+      const containerWidth = document.querySelector('.actor-card').clientWidth;
+      wid = containerWidth;
     }
     
     
@@ -540,18 +552,34 @@ seeFull.addEventListener('click', function() {
 });
 
 moveLeftBtn.addEventListener('click', () => {
-  new_movies.scrollBy({ left: -700, behavior: 'smooth' }); 
+  const itemWidth = wid; 
+  const containerWidth = new_movies.clientWidth;
+  const scrollAmount = Math.floor(containerWidth / itemWidth) * itemWidth / 2;
+  
+  new_movies.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); 
 });
 
 moveRightBtn.addEventListener('click', () => {
-  new_movies.scrollBy({ left: 700, behavior: 'smooth' }); 
+  const itemWidth = wid;
+  const containerWidth = new_movies.clientWidth;
+  const scrollAmount = Math.floor(containerWidth / itemWidth) * itemWidth / 2; 
+  
+  new_movies.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 });
 
 moveLeftBtn1.addEventListener('click', () => {
-  movie_list_rec.scrollBy({ left: -700, behavior: 'smooth' }); 
+  const itemWidth = wid; 
+  const containerWidth = movie_list_rec.clientWidth;
+  const scrollAmount = Math.floor(containerWidth / itemWidth) * itemWidth / 2;
+  
+  movie_list_rec.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); 
 });
 
 moveRightBtn1.addEventListener('click', () => {
-  movie_list_rec.scrollBy({ left: 700, behavior: 'smooth' }); 
+  const itemWidth = wid;
+  const containerWidth = movie_list_rec.clientWidth;
+  const scrollAmount = Math.floor(containerWidth / itemWidth) * itemWidth / 2; 
+  
+  movie_list_rec.scrollBy({ left: scrollAmount, behavior: 'smooth' });
 });
 

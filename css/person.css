@@ -296,15 +296,15 @@ body {
   .movie-card h3 {
     text-align: center;
     height: 50px;
-    width: 90%; 
-    font-size: 20px;
+    width: 85%; 
+    font-size: 19px;
     margin-bottom: 15px;
   }
   
   .movie-card p {
-    font-size: 16px;
+    font-size: 15px;
     text-align: center;
-    width: 80%; 
+    width: 75%; 
     height: auto;
   }
   .movie-card h3,
