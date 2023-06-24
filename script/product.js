@@ -323,56 +323,6 @@ function show_video(jaison){
   }
 }
 
-function searcher(query, mediaType = 'multi') {
-    const dziritadi = `https://api.themoviedb.org/3/search/${mediaType}`;
-    const bolo = `${dziritadi}?api_key=${apiKey}&query=${query}`;
-  
-    return fetch(bolo)
-      .then(response => response.json())
-      .then(data => {
-        const results = data.results || [];
-        return results;
-      })
-      .catch(error => {
-        console.error('search error: ', error);
-        return [];
-      });
-  }
-
-  function createPopup(message) {
-    const popup = document.createElement('div');
-    popup.id = 'popup';
-    popup.textContent = message;
-  
-    document.body.appendChild(popup);
-  
-    setTimeout(() => {
-      popup.remove();
-    }, 3000); 
-  }
-
-  function searchMovies() {
-    const input = document.getElementById('input');
-  
-    const query = input.value;
-  
-    searcher(query)
-      .then(results => {
-        if (results.length > 0) {
-          localStorage.setItem("searched", JSON.stringify(results));
-          window.location = "./explore.html";
-        } else {
-          window.location = "./explore.html";
-        }
-      })
-      .catch(error => {
-        console.error('Error occurred:', error);
-        createPopup('Error occurred');
-      });
-  }
-
-
-
   function show_cast(jaison) {
     new_movies.innerHTML = "";
   
@@ -448,6 +398,7 @@ function searcher(query, mediaType = 'multi') {
         let truncatedDescription = each.overview.substring(0, maxLength) + " ...";
     
         comic_inf.classList.add("actor-card");
+        comic_inf.classList.add("flex_centerer");
     
         comic_inf.innerHTML = `
           <div class="poster">
@@ -524,7 +475,10 @@ searchIcon.addEventListener("click", () => {
 
 searchBar.addEventListener('keypress', function(event) {
   if (event.key === 'Enter') {
-    searchMovies();
+    const input = document.getElementById('input');
+    const query = input.value;
+    localStorage.setItem("searched_word", JSON.stringify(query));
+    window.location = "./explore.html";
   }
 });
 

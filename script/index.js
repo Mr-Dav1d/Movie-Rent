@@ -200,55 +200,6 @@ function show_soon(jaison) {
 
 
 
-function searcher(query, mediaType = 'multi') {
-  const dziritadi = `https://api.themoviedb.org/3/search/${mediaType}`;
-  const bolo = `${dziritadi}?api_key=${apiKey}&query=${query}`;
-
-  return fetch(bolo)
-    .then(response => response.json())
-    .then(data => {
-      const results = data.results || [];
-      return results;
-    })
-    .catch(error => {
-      console.error('search error: ', error);
-      return [];
-    });
-}
-
-function createPopup(message) {
-  const popup = document.createElement('div');
-  popup.id = 'popup';
-  popup.textContent = message;
-
-  document.body.appendChild(popup);
-
-  setTimeout(() => {
-    popup.remove();
-  }, 3000); 
-}
-
-function searchMovies() {
-  const input = document.getElementById('input');
-
-  const query = input.value;
-
-  searcher(query)
-    .then(results => {
-      if (results.length > 0) {
-        console.log('Search results:', results);
-        localStorage.setItem("searched", JSON.stringify(results));
-        window.location = "./pages/explore.html";
-      } else {
-        createPopup('Nothing found');
-      }
-    })
-    .catch(error => {
-      console.error('Error occurred:', error);
-      createPopup('Error occurred');
-    });
-}
- 
 
 
 
@@ -328,7 +279,10 @@ soonRightBtn.addEventListener('click', () => {
 
 searchBar.addEventListener('keypress', function(event) {
   if (event.key === 'Enter') {
-    searchMovies();
+    const input = document.getElementById('input');
+    const query = input.value;
+    localStorage.setItem("searched_word", JSON.stringify(query));
+    window.location = "./pages/explore.html";
   }
 });
 

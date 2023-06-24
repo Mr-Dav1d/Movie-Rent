@@ -292,6 +292,31 @@ body {
     height: 100%;
     width: 100%;
   }
+
+  .bottom_page_nav h2{
+    text-align: center;
+    width: 100px;
+  }
+  .bottom_nav_cont{
+    padding: 10px;
+    border-radius:5px;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.484);
+  }
+  button {
+    background-color:var(--main-color);
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    padding:5px 15px;
+    font-size:16px;
+    cursor:pointer;
+    transition:background-color .3s ease-in-out
+    }
+    
+  button:hover {
+    background-color:var(--second-color)
+  }
   
   
   footer {
@@ -493,6 +518,9 @@ body {
       max-width: auto; 
       max-height: 60px; 
       object-fit: fit;
+    }
+    .bottom_page_nav h2{
+      width: 50px;
     }
   }
   

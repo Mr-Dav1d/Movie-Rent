@@ -306,7 +306,10 @@ function searcher(query, mediaType = 'multi') {
 
   searchBar.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
-      searchMovies();
+      const input = document.getElementById('input');
+      const query = input.value;
+      localStorage.setItem("searched_word", JSON.stringify(query));
+      window.location = "./explore.html";
     }
   });
   

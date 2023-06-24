@@ -45,7 +45,7 @@ async function importFamous(url, sho) {
 
     const mediaIds = new Set();
 
-    const excludedGenreIds = [35, 10767]; 
+    const excludedGenreIds = [10767]; 
 
     const uniqueMedia = jaison.cast.filter((credit) => {
         if (
@@ -66,15 +66,13 @@ async function importFamous(url, sho) {
     if(sho === "less"){
       topMedia = sortedMedia.slice(0, 8);
     }
-    
-    console.log(topMedia);
+  
     showMovies(topMedia);
 }
 
 
 function showMovies(jaison){
     actor_list.innerHTML = "";
-
     jaison.forEach((movie) => {
         const { id ,title, overview, poster_path, media_type, name, profile_path, known_for_department } = movie;
 
@@ -186,58 +184,6 @@ function showActor(jaison){
     `;
 }   
 
-
-
-function searcher(query, mediaType = 'multi') {
-    const dziritadi = `https://api.themoviedb.org/3/search/${mediaType}`;
-    const bolo = `${dziritadi}?api_key=${apiKey}&query=${query}`;
-  
-    return fetch(bolo)
-      .then(response => response.json())
-      .then(data => {
-        const results = data.results || [];
-        return results;
-      })
-      .catch(error => {
-        console.error('search error: ', error);
-        return [];
-      });
-  }
-
-  function createPopup(message) {
-    const popup = document.createElement('div');
-    popup.id = 'popup';
-    popup.textContent = message;
-  
-    document.body.appendChild(popup);
-  
-    setTimeout(() => {
-      popup.remove();
-    }, 3000); 
-  }
-
-  function searchMovies() {
-    const input = document.getElementById('input');
-  
-    const query = input.value;
-  
-    searcher(query)
-      .then(results => {
-        if (results.length > 0) {
-          localStorage.setItem("searched", JSON.stringify(results));
-          window.location = "./explore.html";
-        } else {
-          window.location = "./explore.html";
-        }
-      })
-      .catch(error => {
-        console.error('Error occurred:', error);
-        createPopup('Error occurred');
-      });
-  }
-
-
-
   // clicks
 
   searchIcon.addEventListener("click", () => {
@@ -252,7 +198,10 @@ function searcher(query, mediaType = 'multi') {
   
   searchBar.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
-      searchMovies();
+      const input = document.getElementById('input');
+      const query = input.value;
+      localStorage.setItem("searched_word", JSON.stringify(query));
+      window.location = "./explore.html";
     }
   });
   
