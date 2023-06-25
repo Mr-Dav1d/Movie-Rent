@@ -4,7 +4,6 @@ const poster = document.getElementById("poster");
 const videoFrame = document.getElementById("videoFrame");
 const minus = document.getElementById("minus");
 const plus = document.getElementById("plus");
-const add_cart = document.getElementById("add_cart");
 const week = document.getElementById("week");
 const value = document.getElementById("value");
 const price = document.getElementById("price");
@@ -36,18 +35,23 @@ const movie_list_rec = document.getElementById('movie-list-rec');
 const recomend = document.getElementById('recomend');
 const trailer = document.getElementById('trailer');
 const titles2 = document.getElementById('titles2');
-let wid;
+const checkout_transfer = document.getElementById('checkout_transfer');
 
 
+
+localStorage.removeItem('searched_word');
+localStorage.removeItem('searched');
 
 const product = localStorage.getItem("product");
 const productInfo = JSON.parse(product);
+console.log(productInfo);
 
 const apiKey = '225e69e6fd6663b3c629a8ea6adf8d7c';
 const IMG_PATH = "https://image.tmdb.org/t/p/w1280/";
 const genre_url = 'https://api.themoviedb.org/3/genre/movie/list?api_key=225e69e6fd6663b3c629a8ea6adf8d7c'
 
 const movie_id = productInfo.id;
+
 
 let media_typee = "";
 if(productInfo.media_type === "" || typeof productInfo.media_type === "undefined"){
@@ -68,6 +72,8 @@ const maxLength = 280;
 let isSearchBarVisible = false;
 let isDropVisible = false;
 let isCastBarVisible = false;
+let wid;
+let buy_Dictionary = {};
 
 
 importMovieVideo();
@@ -217,11 +223,13 @@ async function show_product(jaison, genreNames) {
         price.textContent = "Coming Soon";
         plus.disabled = true;
         minus.disabled = true;
-        add_cart.disabled = true;
+        checkout_transfer.disabled = true;
       }
       poster.innerHTML = ` <img src=${IMG_PATH + poster_path} alt="Movie 3"> `;
+      buy_Dictionary["poster"] = poster_path;
       date.textContent = first_air_date;
       namei.textContent = name;
+      buy_Dictionary["title"] = name;
       page_name.textContent = name;
 
       let genre_string = "";
@@ -268,11 +276,13 @@ async function show_product(jaison, genreNames) {
           price.textContent = "Coming Soon";
           plus.disabled = true;
           minus.disabled = true;
-          add_cart.disabled = true;
+          checkout_transfer.disabled = true;
         }
         poster.innerHTML = ` <img src=${IMG_PATH + poster_path} alt="Movie 3"> `;
+        buy_Dictionary["poster"] = poster_path;
         date.textContent = release_date;
         namei.textContent = title;
+        buy_Dictionary["title"] = title;
         page_name.textContent = title;
 
         let genre_string = "";
@@ -535,5 +545,18 @@ moveRightBtn1.addEventListener('click', () => {
   const scrollAmount = Math.floor(containerWidth / itemWidth) * itemWidth / 2; 
   
   movie_list_rec.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+});
+
+
+checkout_transfer.addEventListener('click', () => {
+  const week_amount = week.textContent;
+  const full_price = price.textContent;
+  buy_Dictionary["weeks"] = week_amount;
+  buy_Dictionary["price"] = full_price;
+  buy_Dictionary["id"] = movie_id;
+  buy_Dictionary["media_type"] = media_typee;
+  console.log(buy_Dictionary);
+  localStorage.setItem("buy_Dictionary", JSON.stringify(buy_Dictionary));
+  window.location = "./checkout.html";
 });
 

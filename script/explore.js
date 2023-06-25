@@ -46,13 +46,12 @@ if(searched_word){
 
 function show_movie(jaison) {
     new_movies.innerHTML = "";
-    console.log(jaison);
     jaison.forEach((movie) => {
       
       const { id ,title, overview, poster_path, media_type, name, known_for_department, profile_path } = movie;
 
 
-      if(media_type === "tv"){
+      if(media_type === "tv" || mediaType === "tv"){
         const comic_inf = document.createElement("div");
         comic_inf.classList.add("movie-card");
   
@@ -77,6 +76,7 @@ function show_movie(jaison) {
     
         comic_inf.addEventListener("click", () => {
           localStorage.setItem("product", JSON.stringify(movie));
+          localStorage.setItem("type", JSON.stringify(mediaType));
           localStorage.removeItem('searched_word');
           localStorage.removeItem('searched');
           window.location = "./product.html";
@@ -137,6 +137,7 @@ function show_movie(jaison) {
     
         comic_inf.addEventListener("click", () => {
           localStorage.setItem("product", JSON.stringify(movie));
+          localStorage.setItem("type", JSON.stringify(mediaType));
           localStorage.removeItem('searched_word');
           localStorage.removeItem('searched');
           window.location = "./product.html";
@@ -219,21 +220,36 @@ function show_movie(jaison) {
   });
 
   movie.addEventListener('click', () => {
-    new_movies.innerHTML = "";
-    mediaType = "movie";
-    searchMovies();
+    const searched = localStorage.getItem("searched_word");
+    if(searched){
+      new_movies.innerHTML = "";
+      mediaType = "movie";
+      page_num = 1;
+      where_num.textContent = page_num;
+      searchMovies();
+    }
   });
 
   tv.addEventListener('click', () => {
-    new_movies.innerHTML = "";
-    mediaType = "tv";
-    searchMovies();
+    const searched = localStorage.getItem("searched_word");
+    if(searched){
+      new_movies.innerHTML = "";
+      mediaType = "tv";
+      page_num = 1;
+      where_num.textContent = page_num;
+      searchMovies();
+    }
   });
 
   person.addEventListener('click', () => {
-    new_movies.innerHTML = "";
-    mediaType = "person";
-    searchMovies();
+    const searched = localStorage.getItem("searched_word");
+    if(searched){
+      new_movies.innerHTML = "";
+      mediaType = "person";
+      page_num = 1;
+      where_num.textContent = page_num;
+      searchMovies();
+    }
   });
 
   menuIcon.addEventListener('click', function() {

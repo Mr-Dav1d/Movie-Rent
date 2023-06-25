@@ -189,10 +189,6 @@ function show_soon(jaison) {
         localStorage.setItem("product", JSON.stringify(movie));
         window.location = "./pages/product.html";
       });
-      
-      comic_inf.addEventListener("click", () => {
-          createPopup("Movie Will be Released: " + release_date);
-      });
     });
     const containerWidth = document.querySelector('.movie-card').clientWidth;
     wid = containerWidth;

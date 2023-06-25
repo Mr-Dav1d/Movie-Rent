@@ -336,10 +336,20 @@
   cursor:pointer
   }
   
-  .user_score.medium {
-  background-color:#fc6;
-  color:#000
-  }
+  .user_score.low {
+    background-color: #ff6666;
+    color: #fff;
+}
+  
+.user_score.medium {
+    background-color: #ffcc66;
+    color: #000;
+}
+  
+.user_score.high {
+    background-color: #66cc66;
+    color: #fff;
+}
   
   .bottom {
   width:100%;

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title id="page_name"></title>
+  <link rel="stylesheet" type="text/css" href="../css/checkout.css">
+  <link href="https://fonts.cdnfonts.com/css/akzidenz-grotesk-next" rel="stylesheet">
+</head>
+    <body>
+
+        <div class="flex_centerer container">
+            <h1>Checkout</h1>
+            <div class="movie-details flex_centerer">
+                <div id="poster">
+                    <img src="movie-poster.jpg" alt="Movie Poster">
+                </div>
+                <div class="movie-info flex_centerer">
+                    <h2 id="title" class="movie-title">Movie Title</h2>
+                    <div>
+                        <p class="rent-duration">Rent Duration: <span id="weeks" class="weeks">2 weeks</span></p>
+                        <p class="total-cost">Total Cost: <span id="cost" class="cost">$9.99</span></p>
+                    </div>
+                    <button>checkout</button>
+                </div>
+            </div>
+            <div id="suggestions">
+                <div class="titles2 flex_space_between" id="titles2">
+                    <h2>Users Also Rent</h2>
+                    <div class="clickers2 flex_centerer" id="clickers">
+                      <button id="move-left1"> < </button>
+                      <button id="move-right1"> > </button>
+                    </div>
+                </div>
+                <div class="movie-list2" id="movie-list-rec"></div>
+            </div>
+            <button id="seeFull">Go Home</button>
+        </div>
+
+        <script src="../script/checkout.js"></script>
+    </body>
+</html>
